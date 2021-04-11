@@ -1,13 +1,13 @@
 <div class="container">
   <div class="col-md-8">
-    <div class="loginContainer">
+    <div class="loginimageContainer">
       <div style="text-align:center;">
         <%= image_tag 'pchs-logo.png', class: "loginImg" %>
       </div>
     </div>
   </div>
   <div class="col-md-4">
-    <div style="margin:150px 0">
+    <div class="loginContainer">
       <div style="text-align:left;">
         <h2>Log in</h2>
           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
