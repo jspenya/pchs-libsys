@@ -10,6 +10,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  image       :string
+#  author      :string
 #
 class Book < ApplicationRecord
   belongs_to :subject
@@ -17,8 +18,8 @@ class Book < ApplicationRecord
   mount_uploader :image, ImageUploader
 
   validates_presence_of :title
-  validates_numericality_of :price, message: 'Price should be numeric'
-  validates :image, file_size: { less_than: 1.megabytes }
+  # validates_numericality_of :price, message: 'Price should be numeric'
+  # validates :image, file_size: { less_than: 1.megabytes }
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|

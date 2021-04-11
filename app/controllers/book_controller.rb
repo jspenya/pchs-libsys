@@ -1,4 +1,5 @@
 class BookController < ApplicationController
+  include ActiveModel::ForbiddenAttributesProtection
   # protect_from_forgery with: :null_session  # remove csrf authentication on http requests
   require 'csv' 
 
@@ -20,11 +21,6 @@ class BookController < ApplicationController
     redirect_to book_index_path, notice: "Books added successfully!"
   end
 
-  # create - permit params
-  def book_params
-    params.require(:book).permit(:title, :price, :subject_id, :description, :image)
-  end
-
   def create
     @book = Book.new(book_params)
     if @book.save
@@ -38,11 +34,6 @@ class BookController < ApplicationController
   def edit
     @book = Book.find(params[:id])
     @subjects = Subject.all
-  end
-
-  # update - permit params
-  def book_param
-    params.require(:book).permit(:title, :price, :subject_id, :description, :image, :image_cache)
   end
 
   def update
@@ -70,4 +61,15 @@ class BookController < ApplicationController
   def show_subjects
     @subject = Subject.find(params[:id])
   end
+
+  private
+  # create - permit params
+  def book_params
+    params.require(:book).permit(:title, :author, :subject_id, :description, :image)
+  end
+   # update - permit params
+   def book_param
+    params.require(:book).permit(:title, :author, :price, :subject_id, :description, :image, :image_cache)
+  end
+
 end
