@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     get :send_details, on: :member
     get :delete, on: :member
     get :show_subjects, on: :collection
+    collection { post :import }
   end
 
   devise_scope :user do

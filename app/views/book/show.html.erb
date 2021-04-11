@@ -1,6 +1,4 @@
 <h1><%= @book.title %></h1>
-<strong>Price: </strong>
-<p> Rs.<%= @book.price %></p>
 <strong>Subject: </strong>
 <p> <%= link_to @book.subject.name, action: :show_subjects, id: @book.subject.id %></p>
 <strong>Created Date: </strong>

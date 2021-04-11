@@ -1,5 +1,6 @@
 class BookController < ApplicationController
   # protect_from_forgery with: :null_session  # remove csrf authentication on http requests
+  require 'csv' 
 
   def index
     @books = Book.all
@@ -12,6 +13,11 @@ class BookController < ApplicationController
   def new
     @book = Book.new
     @subjects = Subject.all
+  end
+
+  def import
+    Book.import(params[:file])
+    redirect_to book_index_path, notice: "Books added successfully!"
   end
 
   # create - permit params
