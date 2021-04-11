@@ -22,10 +22,6 @@
     <!-- Helps to persist the image file across form redisplays -->
     <%= f.hidden_field :image_cache %>
   </p>
-  <p>
-    <%= f.label :file, 'CSV file:' %><br>
-    <%= f.file_field :file %><br>
-  </p>
   <%= f.submit %>
 <% end %>
 <%= render 'shared/errors', object: @book %>

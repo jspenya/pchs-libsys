@@ -9,10 +9,6 @@
     <%= f.text_field :author, required: 'required' %><br>
   </p>
   <p>
-    <%= f.label :price, 'Price:'  %><br>
-    <%= f.number_field :price, required: 'required' %><br>
-  </p>
-  <p>
     <%= f.label :subject, 'Subject:' %><br>
     <%= f.select :subject_id, options_for_select(@subjects.collect { |s| [s.name, s.id] }), prompt: true, required: 'required' %><br>
   </p>
