@@ -1,6 +1,3 @@
-# library-management
-Library Management System - Ruby on Rails
-
 Features
 --------
 
@@ -8,6 +5,7 @@ Features
 - Books CRUD
 - Mail book details to user (Async)
 - Subject-wise Categorization of Books
+- Import books via CSV
 
 Gems
 ----
