@@ -2,15 +2,18 @@
 #
 # Table name: books
 #
-#  id          :bigint           not null, primary key
-#  title       :string(32)       not null
-#  price       :float
-#  subject_id  :integer
-#  description :text
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  image       :string
-#  author      :string
+#  id              :bigint           not null, primary key
+#  title           :string(32)       not null
+#  price           :float
+#  subject_id      :integer
+#  description     :text
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  image           :string
+#  author          :string
+#  isbn            :string
+#  publisher       :string
+#  borrow_duration :integer
 #
 
 # This model initially had no columns defined. If you add columns to the

@@ -1,5 +1,4 @@
 class BookController < ApplicationController
-  include ActiveModel::ForbiddenAttributesProtection
   # protect_from_forgery with: :null_session  # remove csrf authentication on http requests
   require 'csv' 
 
