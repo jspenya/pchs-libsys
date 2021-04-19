@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_19_112805) do
+ActiveRecord::Schema.define(version: 2021_04_19_114655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(version: 2021_04_19_112805) do
     t.string "publisher"
     t.integer "borrow_duration"
     t.index ["isbn"], name: "index_books_on_isbn", unique: true
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.string "lrn"
+    t.string "firstname"
+    t.string "lastname"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lrn"], name: "index_students_on_lrn", unique: true
   end
 
   create_table "subjects", force: :cascade do |t|
