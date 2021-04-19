@@ -17,6 +17,8 @@
 #
 class Book < ApplicationRecord
   belongs_to :subject
+  has_many :borrowed_books
+  has_many :students, :through => :borrowed_books
 
   mount_uploader :image, ImageUploader
 
