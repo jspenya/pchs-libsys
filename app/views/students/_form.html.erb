@@ -30,3 +30,8 @@
     <%= form.submit %>
   </div>
 <% end %>
+<h3>Import Students via CSV</h3>
+<%= form_tag import_students_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag 'Upload Students' %>
+<% end %>

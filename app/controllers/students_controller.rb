@@ -5,6 +5,11 @@ class StudentsController < ApplicationController
   def index
     @user = current_user
     @students = Student.all
+    @students = @students.paginate(page: params[:page], per_page: 10)
+
+    if params[:keyword].present?
+			@students = @students.where('lower(lrn) LIKE :query OR lower(firstname) LIKE :query OR lower(lastname) LIKE :query', query: "%#{(params[:keyword]).downcase}%")
+		end
   end
 
   # GET /students/1 or /students/1.json
@@ -14,11 +19,13 @@ class StudentsController < ApplicationController
 
   # GET /students/new
   def new
+    @user = current_user
     @student = Student.new
   end
 
   # GET /students/1/edit
   def edit
+    @user = current_user
     @user = current_user
   end
 
@@ -57,6 +64,11 @@ class StudentsController < ApplicationController
       format.html { redirect_to students_url, notice: "Student was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def import
+    Student.import(params[:file])
+    redirect_to students_path, notice: "Students added successfully!"
   end
 
   private

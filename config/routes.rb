@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :students
+  resources :students do
+    collection { post :import }
+  end
   devise_for :users
 
   root :to => "books#index"
