@@ -24,5 +24,10 @@
   </p>
   <%= f.submit %>
 <% end %>
+<h3>Import Books via CSV</h3>
+<%= form_tag import_books_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag 'Upload Books' %>
+<% end %>
 <%= render 'shared/errors', object: @book %>
 <%= link_to 'Back', { action: :index } %>

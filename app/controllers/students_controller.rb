@@ -3,11 +3,13 @@ class StudentsController < ApplicationController
 
   # GET /students or /students.json
   def index
+    @user = current_user
     @students = Student.all
   end
 
   # GET /students/1 or /students/1.json
   def show
+    @user = current_user
   end
 
   # GET /students/new
@@ -17,6 +19,7 @@ class StudentsController < ApplicationController
 
   # GET /students/1/edit
   def edit
+    @user = current_user
   end
 
   # POST /students or /students.json

@@ -1,23 +1,49 @@
-class BookController < ApplicationController
+class BooksController < ApplicationController
   # protect_from_forgery with: :null_session  # remove csrf authentication on http requests
   require 'csv' 
 
   def index
+    @user = current_user
     @books = Book.all
+    @books = @books.paginate(page: params[:page], per_page: 10)
   end
 
+  def filter_book
+		book_category = params[:subject_id]
+		if book_category == "1"
+			@books = Book.where(subject_id: 1).paginate(page: params[:page], per_page: 10)
+		elsif book_category == "2"
+			@books = Book.where(subject_id: 2).paginate(page: params[:page], per_page: 10)
+    elsif book_category == "3"
+			@books = Book.where(subject_id: 3).paginate(page: params[:page], per_page: 10)
+    elsif book_category == "4"
+			@books = Book.where(subject_id: 4).paginate(page: params[:page], per_page: 10)
+    elsif book_category == "5"
+			@books = Book.where(subject_id: 5).paginate(page: params[:page], per_page: 10)
+		else
+			@books = Book.all.paginate(page: params[:page], per_page: 10)
+		end
+
+    respond_to do |format|
+			format.html { }
+			format.js { }
+		end
+	end
+
   def show
+    @user = current_user
     @book = Book.find(params[:id])
   end
 
   def new
+    @user = current_user
     @book = Book.new
     @subjects = Subject.all
   end
 
   def import
     Book.import(params[:file])
-    redirect_to book_index_path, notice: "Books added successfully!"
+    redirect_to book_path, notice: "Books added successfully!"
   end
 
   def create
@@ -31,6 +57,7 @@ class BookController < ApplicationController
   end
 
   def edit
+    @user = current_user
     @book = Book.find(params[:id])
     @subjects = Subject.all
   end
@@ -47,6 +74,7 @@ class BookController < ApplicationController
 
   def delete
     Book.find(params[:id]).destroy
+    flash[:notice] = 'Book deleted successfully'
     redirect_to action: :index
   end
 
@@ -58,6 +86,7 @@ class BookController < ApplicationController
   end
 
   def show_subjects
+    @user = current_user
     @subject = Subject.find(params[:id])
   end
 

@@ -1,0 +1,47 @@
+
+<nav class="navbar navbar-expand-md navbar-dark" style="background-color: #1361aa;">
+  <div class="container">
+    <div class="row">
+      <%= link_to root_path, class:'navbar-brand' do %>
+        <%= image_tag ('open-book.svg'), class:'booknavbarLogo' %>
+      <% end %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <% if @user.admin? %>
+            <li class="nav-item active">
+              <%= link_to "Books", books_path(), class:'nav-link' %>
+            </li>
+          <% end %>
+          <li class="nav-item active">
+            <%= link_to "Students", students_path, class:"nav-link" %>
+          </li>
+          <% if user_signed_in? %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                My Profile
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                Logged in as <strong><%= current_user.email %></strong>
+                <%= link_to 'Edit profile', edit_user_registration_path, :class => 'dropdown-item' %>
+                <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'dropdown-item'  %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  $(document).ready(function(){
+    $('.navbar .dropdown').hover(function() {
+        $(this).find('.dropdown-menu').first().stop(true, true).delay(250).slideDown();
+    }, function() {
+        $(this).find('.dropdown-menu').first().stop(true, true).delay(100).slideUp()
+    });
+  })
+</script>

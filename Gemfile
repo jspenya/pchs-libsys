@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.7'
 
+gem 'will_paginate', '~> 3.1.0'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.0'
 # Use sqlite3 as the database for Active Record
@@ -32,7 +34,7 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'bootstrap-sass'
+# gem 'bootstrap-sass'
 gem 'bootstrap', '~> 4.6.0'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -42,6 +44,7 @@ gem 'mini_magick' # Generate thumbnails
 gem 'file_validators' # validate uploaded files
 gem 'devise' # authorization and authentication (sessions)
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'sidekiq' # background processing
 
 group :development, :test do

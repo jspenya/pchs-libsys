@@ -7,24 +7,18 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag "jquery", "application" %>
   </head>
 
   <body>
-  <center>
     <% if user_signed_in? %>
-      Logged in as <strong><%= current_user.email %></strong>.
-      <br><br>
-      <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-      <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+      <%= render 'layouts/navbar' %>
     <% end %>
     <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
+      <p class="alert alert-success text-center"><%= notice %></p>
     <% end %>
     <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
+      <p class="alert alert-danger text-center"><%= alert %></p>
     <% end %>
     <%= yield %>
-    </center>
   </body>
 </html>
