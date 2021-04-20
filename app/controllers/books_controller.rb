@@ -43,7 +43,7 @@ class BooksController < ApplicationController
 
   def import
     Book.import(params[:file])
-    redirect_to book_path, notice: "Books added successfully!"
+    redirect_to books_path, notice: "Books added successfully!"
   end
 
   def create

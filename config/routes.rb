@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :students
   devise_for :users
 
-  # root :to => "books#index"
+  root :to => "books#index"
 
   resources :books, except: :destroy do
     get :send_details, on: :member
@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   devise_scope :user do
-    root to: "devise/sessions#new"
+    # root to: "devise/sessions#new"
   end
 
 	get '/filter_book', to: "books#filter_book", as: "filter_book"

@@ -1,49 +1,50 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h4>Subject Categories</h4>
-      <ul id="subjects">
-      <% Subject.all.each do |c| %>
-      <li><%= link_to c.name, action: :show_subjects, id: c.id %></li>
-      <% end %>
-      </ul>
-      <h4>Books</h4>
-      <p><%= link_to "New Book", { action: :new }%></p>
-
-      <% if @books.blank? %>
-        <p>There are no books currently in the system.</p>
-      <% else %>
-      <div class="">
-        <%= link_to filter_book_path(subject_id: "1"), remote: true, class: "", title: "All Physics books" do %>
-          Physics (<%= @books.where(subject_id: 1).count %>)
-        <% end %>
-        <%= link_to filter_book_path(subject_id: "2"), remote: true, class: "", title: "All Math books" do %>
-          Mathematics (<%= @books.where(subject_id: 2).count %>)
-        <% end %>
-        <%= link_to filter_book_path(subject_id: "3"), remote: true, class: "", title: "All Chemistry books" do %>
-          Chemistry (<%= @books.where(subject_id: 3).count %>)
-        <% end %>
-        <%= link_to filter_book_path(subject_id: "4"), remote: true, class: "", title: "All Psychology books" do %>
-          Psychology (<%= @books.where(subject_id: 4).count %>)
-        <% end %>
-        <%= link_to filter_book_path(subject_id: "5"), remote: true, class: "", title: "All Geography books" do %>
-          Geography (<%= @books.where(subject_id: 5).count %>)
-        <% end %>
-        <%= link_to filter_book_path(subject_id: ""), remote: true, class: "", title: "All books" do %>
-          Show All (<%= @books.all.count %>)
-        <% end %>
-      </div>
-        <div class="container">
-          <div class="row">
-            <div class="col">
-              <table class="booksTable table table-responsive-md">
-                <%= render partial: "booksTable", locals: {books: @books} %>
-              </table>
+      <%# <h4>Subject Categories</h4> %>
+      <%# <ul id="subjects"> %>
+      <%# Subject.all.each do |c| %>
+      <%# <li><%= link_to c.name, action: :show_subjects, id: c.id</li>  %>
+      <%# end %>
+      <%# </ul> %>
+      <div class="booksContainer">
+        <h4>Books</h4>
+        <p><%= link_to "New Book", { action: :new }%></p>
+        <% if @books.blank? %>
+          <p>There are no books currently in the system.</p>
+        <% else %>
+          <div class="">
+            <%= link_to filter_book_path(subject_id: "1"), remote: true, class: "", title: "All Physics books" do %>
+              Physics (<%= @books.where(subject_id: 1).count %>) |
+            <% end %>
+            <%= link_to filter_book_path(subject_id: "2"), remote: true, class: "", title: "All Math books" do %>
+              Mathematics (<%= @books.where(subject_id: 2).count %>) |
+            <% end %>
+            <%= link_to filter_book_path(subject_id: "3"), remote: true, class: "", title: "All Chemistry books" do %>
+              Chemistry (<%= @books.where(subject_id: 3).count %>) |
+            <% end %>
+            <%= link_to filter_book_path(subject_id: "4"), remote: true, class: "", title: "All Psychology books" do %>
+              Psychology (<%= @books.where(subject_id: 4).count %>) |
+            <% end %>
+            <%= link_to filter_book_path(subject_id: "5"), remote: true, class: "", title: "All Geography books" do %>
+              Geography (<%= @books.where(subject_id: 5).count %>) |
+            <% end %>
+            <%= link_to filter_book_path(subject_id: ""), remote: true, class: "", title: "All books" do %>
+              Show All (<%= @books.all.count %>)
+            <% end %>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <table class="booksTable table table-responsive-md">
+                  <%= render partial: "booksTable", locals: {books: @books} %>
+                </table>
+              </div>
             </div>
           </div>
-        </div>
-        <%= will_paginate @books %>
-      <% end %>
+          <%= will_paginate @books %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
