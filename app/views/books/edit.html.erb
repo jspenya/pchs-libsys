@@ -1,5 +1,5 @@
 <h1>Edit book details</h1>
-<%= form_for :book, remote: true, method: :PUT, url: {controller: :book, action: :update} do |f| %>
+<%= form_for :book, remote: true, method: :PUT, url: {controller: :books, action: :update} do |f| %>
   <p>
     <%= f.label :title, 'Title:' %><br>
     <%= f.text_field :title, required: 'required' %><br>
