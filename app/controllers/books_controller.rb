@@ -6,6 +6,10 @@ class BooksController < ApplicationController
     @user = current_user
     @books = Book.all
     @books = @books.paginate(page: params[:page], per_page: 10)
+
+    if params[:keyword].present?
+			@books = @books.where('lower(isbn) LIKE :query OR lower(title) LIKE :query OR lower(author) LIKE :query', query: "%#{(params[:keyword]).downcase}%")
+		end
   end
 
   def filter_book

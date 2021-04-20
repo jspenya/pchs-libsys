@@ -13,6 +13,14 @@
         <% if @books.blank? %>
           <p>There are no books currently in the system.</p>
         <% else %>
+          <div class="searchContainer">
+            <%= form_tag(books_path, method: :get) do %>
+              Enter a Keyword: <%= text_field_tag :keyword, params[:keyword], class:"searchBox", placeholder: "ISBN or Book Title or Author Name" %>
+              <div class="submitTag">
+              <%= submit_tag "Search", class: "searchfilterButton" %>
+              </div>
+            <% end %>
+          </div>
           <div class="">
             <%= link_to filter_book_path(subject_id: "1"), remote: true, class: "", title: "All Physics books" do %>
               Physics (<%= @books.where(subject_id: 1).count %>) |
