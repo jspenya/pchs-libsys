@@ -7,12 +7,20 @@ class BorrowedBooksController < ApplicationController
   def new
     @user = current_user
     @borrowed_book = BorrowedBook.new
-    @books = Book.all
+    @available_books = Book.not_borrowed
     @students = Student.all
+  end
+
+  def return_book
+    @borrowed_book = BorrowedBook.find(params[:id])
+    flash[:notice] = 'Book is returned sucessfully!'
+    redirect_to borrowed_book_path(@borrowed_book.id)
   end
 
   def show
     @user = current_user
+    @borrowed_book = BorrowedBook.find(params[:id])
+    @due = @borrowed_book.created_at + (@borrowed_book.book.borrow_duration).day
   end
 
   def create
@@ -37,6 +45,6 @@ class BorrowedBooksController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def borrowed_book_params
-    params.require(:borrowed_book).permit(:student_id, :book_id, :user_id)
+    params.require(:borrowed_book).permit(:student_id, :book_id, :user_id, :due_date)
   end
 end

@@ -18,4 +18,8 @@ class Student < ApplicationRecord
       Student.create! row.to_hash
     end
   end
+
+  def fullname
+    "#{lrn}, #{lastname}, #{firstname}"
+  end
 end

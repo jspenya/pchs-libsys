@@ -14,11 +14,12 @@ Rails.application.routes.draw do
   end
 
   resources :borrowed_books
-  
+
   devise_scope :user do
     # root to: "devise/sessions#new"
   end
 
 	get '/filter_book', to: "books#filter_book", as: "filter_book"
+	get '/borrowed_books/:id/return_book', to: "borrowed_books#return_book", as: "return_book"
 
 end

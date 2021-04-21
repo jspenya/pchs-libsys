@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1><%= @borrowed_book.book.title %></h1>
+      <strong>Borrow Date: </strong>
+      <p> <%= (@borrowed_book.created_at).strftime("%B %d, %Y at %l:%M:%S %p") %></p>
+      <strong>Borrower: </strong>
+      <p> <%= link_to @borrowed_book.student.fullname, action: :show, controller: :students, id: @borrowed_book.student_id %></p>
+      <strong>Return Date: </strong>
+      <% if @borrowed_book.return_date? %>
+        <p> <%= (@borrowed_book.return_date).strftime("%B %d, %Y") %></p>
+      <% else %>
+        <p>Book is unreturned.</p>
+      <% end %>
+      <strong>Due Date: </strong>
+      <p>Book is due: <%= (@due).strftime("%B %d, %Y at %l:%M:%S %p") %></p>
+      <hr/>
+
+      <% if !@borrowed_book.return_date? %>
+        <%= link_to 'Confirm Book Return', { action: :return_book, id: @borrowed_book.id }, data: { confirm: 'Are you sure?' } %>
+      <% end %> <br/><br/>
+      <%= link_to 'Back', { action: :index } %>
+    </div>
+  </div>
+</div>
+
