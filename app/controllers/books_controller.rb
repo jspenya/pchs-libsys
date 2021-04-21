@@ -5,7 +5,7 @@ class BooksController < ApplicationController
   def index
     @user = current_user
     @books = Book.all
-    @books = @books.paginate(page: params[:page], per_page: 10)
+    # @books = @books.paginate(page: params[:page], per_page: 10)
 
     if params[:keyword].present?
 			@books = @books.where('lower(isbn) LIKE :query OR lower(title) LIKE :query OR lower(author) LIKE :query', query: "%#{(params[:keyword]).downcase}%")
@@ -15,17 +15,17 @@ class BooksController < ApplicationController
   def filter_book
 		book_category = params[:subject_id]
 		if book_category == "1"
-			@books = Book.where(subject_id: 1).paginate(page: params[:page], per_page: 10)
+			@books = Book.where(subject_id: 1)
 		elsif book_category == "2"
-			@books = Book.where(subject_id: 2).paginate(page: params[:page], per_page: 10)
+			@books = Book.where(subject_id: 2)
     elsif book_category == "3"
-			@books = Book.where(subject_id: 3).paginate(page: params[:page], per_page: 10)
+			@books = Book.where(subject_id: 3)
     elsif book_category == "4"
-			@books = Book.where(subject_id: 4).paginate(page: params[:page], per_page: 10)
+			@books = Book.where(subject_id: 4)
     elsif book_category == "5"
-			@books = Book.where(subject_id: 5).paginate(page: params[:page], per_page: 10)
+			@books = Book.where(subject_id: 5)
 		else
-			@books = Book.all.paginate(page: params[:page], per_page: 10)
+			@books = Book.all
 		end
 
     respond_to do |format|

@@ -1,24 +1,30 @@
 <p id="notice"><%= notice %></p>
 
-<div class="studentsContainer">
-  <h4>Students</h4>
-  <p><%= link_to 'New Student', new_student_path %></p>
-    <div class="searchContainer">
-      <%= form_tag(students_path, method: :get) do %>
-        Enter a Keyword: <%= text_field_tag :keyword, params[:keyword], class:"searchBox", placeholder: "LRN or Any Student Name" %>
-        <div class="submitTag">
-        <%= submit_tag "Search", class: "searchfilterButton" %>
-        </div>
-      <% end %>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <table class="studentsTable table table-responsive-md">
-            <%= render partial: "studentsTable", locals: {students: @students} %>
-          </table>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="studentsContainer">
+        <h4>Students</h4>
+        <p><%= link_to 'New Student', new_student_path %></p>
+          <div class="searchContainer">
+            <%= form_tag(students_path, method: :get) do %>
+              Enter a Keyword: <%= text_field_tag :keyword, params[:keyword], class:"searchBox", placeholder: "LRN or Any Student Name" %>
+              <div class="submitTag">
+              <%= submit_tag "Search", class: "searchfilterButton" %>
+              </div>
+            <% end %>
+          </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <table class="studentsTable table table-responsive-md">
+              <%= render partial: "studentsTable", locals: {students: @students} %>
+            </table>
+          </div>
         </div>
       </div>
+      <%#= will_paginate @students %>
     </div>
-    <%= will_paginate @students %>
+  </div>
 </div>

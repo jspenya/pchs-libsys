@@ -5,7 +5,7 @@ class StudentsController < ApplicationController
   def index
     @user = current_user
     @students = Student.all
-    @students = @students.paginate(page: params[:page], per_page: 10)
+    @students = @students
 
     if params[:keyword].present?
 			@students = @students.where('lower(lrn) LIKE :query OR lower(firstname) LIKE :query OR lower(lastname) LIKE :query', query: "%#{(params[:keyword]).downcase}%")
