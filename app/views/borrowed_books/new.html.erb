@@ -1,0 +1,14 @@
+<h1>Add new record for Borrowing a Book</h1>
+<%= form_for :borrowed_book, remote: true, url: { controller: :borrowed_books, action: :create } do |f| %>
+  <p>
+    <%= f.label :book, 'Book:' %><br>
+    <%= f.select :book_id, options_for_select(@books.collect { |b| [b.title, b.id] }), { include_blank: 'Choose a Book' } %><br>
+  </p>
+  <p>
+    <%= f.label :student, 'Student:' %><br>
+    <%= f.select :student_id, options_for_select(@students.collect { |s| [s.lrn, s.id] }), { include_blank: 'Select Student' } %><br>
+  </p>
+  <%= f.submit %>
+<% end %>
+<%= render 'shared/errors', object: @borrowed_book %>
+<%= link_to 'Back', { action: :index } %>

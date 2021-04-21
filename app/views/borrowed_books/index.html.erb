@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<div class="borrowsContainer">
+  <h4>Borrowed Books Records</h4>
+  <p><%= link_to 'New Record', new_borrowed_book_path %></p>
+    <div class="searchContainer">
+      <%= form_tag(borrowed_books_path, method: :get) do %>
+        Enter a Keyword: <%= text_field_tag :keyword, params[:keyword], class:"searchBox", placeholder: "Borrow Date/Student name/Book Title" %>
+        <div class="submitTag">
+        <%= submit_tag "Search", class: "searchfilterButton" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <table class="studentsTable table table-responsive-md">
+            <%= render partial: "borrowedbooksTable", locals: {borrowed_books: @borrowed_books} %>
+          </table>
+        </div>
+      </div>
+    </div>
+    <%#= will_paginate @students %>
+</div>

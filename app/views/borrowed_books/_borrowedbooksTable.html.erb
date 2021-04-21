@@ -1,0 +1,22 @@
+<thead class="thead-dark">
+  <tr>
+    <th scope="col">Borrow Date </th>
+    <th scope="col">Book Title</th>
+    <th scope="col">Student Name</th>
+    <th scope="col"></th>
+    <th scope="col"></th>
+  </tr>
+</thead>
+
+<tbody>
+  <% borrowed_books.each do |borrowed_book| %>
+    <tr>
+      <td><%= borrowed_book.created_at %></td>
+      <td><%= borrowed_book.book.title %></td>
+      <td><%= borrowed_book.student.lastname %>, <%= borrowed_book.student.firstname %></td>
+      <td></td>
+      <td></td>
+    </tr>
+  <% end %>
+</tbody>
+  

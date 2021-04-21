@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     collection { post :import }
   end
 
+  resources :borrowed_books
+  
   devise_scope :user do
     # root to: "devise/sessions#new"
   end

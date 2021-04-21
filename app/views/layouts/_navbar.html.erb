@@ -18,6 +18,11 @@
           <li class="nav-item active">
             <%= link_to "Students", students_path, class:"nav-link" %>
           </li>
+          <% if @user.admin? %>
+            <li class="nav-item active">
+              <%= link_to "Borrow a Book", borrowed_books_path(), class:'nav-link' %>
+            </li>
+          <% end %>
           <% if user_signed_in? %>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
