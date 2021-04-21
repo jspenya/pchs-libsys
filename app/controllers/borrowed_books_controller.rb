@@ -13,8 +13,13 @@ class BorrowedBooksController < ApplicationController
 
   def return_book
     @borrowed_book = BorrowedBook.find(params[:id])
-    flash[:notice] = 'Book is returned sucessfully!'
-    redirect_to borrowed_book_path(@borrowed_book.id)
+    if @borrowed_book.update(return_date: DateTime.now)
+      flash[:notice] = 'Book is returned sucessfully!'
+      redirect_to borrowed_book_path(@borrowed_book.id)
+    else
+      flash[:error] = 'There seems to be an error in returning book.'
+      redirect_to borrowed_book_path(@borrowed_book.id)
+    end
   end
 
   def show
