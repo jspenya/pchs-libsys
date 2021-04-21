@@ -1,5 +1,15 @@
 class StudentsController < ApplicationController
+  before_action :check_user
   before_action :set_student, only: %i[ show edit update destroy ]
+
+  def check_user
+    @user = current_user
+    if @user.admin?
+    else
+      flash[:notice] = "You have no power!" 
+      redirect_to root_path
+    end
+  end
 
   # GET /students or /students.json
   def index

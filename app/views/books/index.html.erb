@@ -9,45 +9,76 @@
       <%# </ul> %>
       <div class="booksContainer">
       <h4>Books</h4>
-      <p><%= link_to "New Book", { action: :new }%></p>
+      <% if @user.admin? %>
+        <p><%= link_to "New Book", { action: :new }%></p>
+      <% end %>
       <% if @books.blank? %>
         <p>There are no books currently in the system.</p>
       <% else %>
         <div class="searchContainer">
           <%= form_tag(books_path, method: :get) do %>
-            Enter a Keyword: <%= text_field_tag :keyword, params[:keyword], class:"searchBox", placeholder: "ISBN or Book Title or Author Name" %>
+            Search for a book (enter keywords): <%= text_field_tag :keyword, params[:keyword], class:"searchBox", placeholder: "ISBN or Book Title or Author Name" %>
             <div class="submitTag">
             <%= submit_tag "Search", class: "searchfilterButton" %>
             </div>
           <% end %>
           </div>
       </div>
-        <div class="">
-          <%= link_to filter_book_path(subject_id: "1"), remote: true, class: "", title: "All Physics books" do %>
-            Physics (<%= @books.where(subject_id: 1).count %>) |
-          <% end %>
-          <%= link_to filter_book_path(subject_id: "2"), remote: true, class: "", title: "All Math books" do %>
-            Mathematics (<%= @books.where(subject_id: 2).count %>) |
-          <% end %>
-          <%= link_to filter_book_path(subject_id: "3"), remote: true, class: "", title: "All Chemistry books" do %>
-            Chemistry (<%= @books.where(subject_id: 3).count %>) |
-          <% end %>
-          <%= link_to filter_book_path(subject_id: "4"), remote: true, class: "", title: "All Psychology books" do %>
-            Psychology (<%= @books.where(subject_id: 4).count %>) |
-          <% end %>
-          <%= link_to filter_book_path(subject_id: "5"), remote: true, class: "", title: "All Geography books" do %>
-            Geography (<%= @books.where(subject_id: 5).count %>) |
-          <% end %>
-          <%= link_to filter_book_path(subject_id: ""), remote: true, class: "", title: "All books" do %>
-            Show All (<%= @books.all.count %>)
-          <% end %>
-        </div>
+        <% if @user.admin? %>
+          <div class="">
+            <%= link_to filter_book_path(subject_id: "1"), remote: true, class: "", title: "All Physics books" do %>
+              Physics (<%= @books.where(subject_id: 1).count %>) |
+            <% end %>
+            <%= link_to filter_book_path(subject_id: "2"), remote: true, class: "", title: "All Math books" do %>
+              Mathematics (<%= @books.where(subject_id: 2).count %>) |
+            <% end %>
+            <%= link_to filter_book_path(subject_id: "3"), remote: true, class: "", title: "All Chemistry books" do %>
+              Chemistry (<%= @books.where(subject_id: 3).count %>) |
+            <% end %>
+            <%= link_to filter_book_path(subject_id: "4"), remote: true, class: "", title: "All Psychology books" do %>
+              Psychology (<%= @books.where(subject_id: 4).count %>) |
+            <% end %>
+            <%= link_to filter_book_path(subject_id: "5"), remote: true, class: "", title: "All Geography books" do %>
+              Geography (<%= @books.where(subject_id: 5).count %>) |
+            <% end %>
+            <%= link_to filter_book_path(subject_id: ""), remote: true, class: "", title: "All books" do %>
+              Show All (<%= @books.all.count %>)
+            <% end %>
+          </div>
+        <% else %>
+          <div class="">
+            <%= link_to stud_filter_book_path(subject_id: "1"), remote: true, class: "", title: "All Physics books" do %>
+              Physics (<%= @books.where(subject_id: 1).count %>) |
+            <% end %>
+            <%= link_to stud_filter_book_path(subject_id: "2"), remote: true, class: "", title: "All Math books" do %>
+              Mathematics (<%= @books.where(subject_id: 2).count %>) |
+            <% end %>
+            <%= link_to stud_filter_book_path(subject_id: "3"), remote: true, class: "", title: "All Chemistry books" do %>
+              Chemistry (<%= @books.where(subject_id: 3).count %>) |
+            <% end %>
+            <%= link_to stud_filter_book_path(subject_id: "4"), remote: true, class: "", title: "All Psychology books" do %>
+              Psychology (<%= @books.where(subject_id: 4).count %>) |
+            <% end %>
+            <%= link_to stud_filter_book_path(subject_id: "5"), remote: true, class: "", title: "All Geography books" do %>
+              Geography (<%= @books.where(subject_id: 5).count %>) |
+            <% end %>
+            <%= link_to stud_filter_book_path(subject_id: ""), remote: true, class: "", title: "All books" do %>
+              Show All (<%= @books.all.count %>)
+            <% end %>
+          </div>
+        <% end %>
         <div class="container">
           <div class="row">
             <div class="col">
-              <table class="booksTable table table-responsive-md">
-                <%= render partial: "booksTable", locals: {books: @books} %>
-              </table>
+              <% if @user.admin? %>
+                <table class="booksTable table table-responsive-md">
+                    <%= render partial: "booksTable", locals: {books: @books} %>
+                </table>
+              <% else %>
+                <table class="booksTableForStudents table table-responsive-md">
+                  <%= render partial: "booksTableForStudents", locals: {books: @books} %>
+                </table>
+              <% end %>
             </div>
           </div>
         </div>

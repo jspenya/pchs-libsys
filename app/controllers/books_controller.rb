@@ -1,6 +1,16 @@
 class BooksController < ApplicationController
   # protect_from_forgery with: :null_session  # remove csrf authentication on http requests
+  before_action :check_user, except: [:index, :stud_filter_book]
   require 'csv' 
+
+  def check_user
+    @user = current_user
+    if @user.admin?
+    else
+      flash[:notice] = "You have no power!" 
+      redirect_to root_path
+    end
+  end
 
   def index
     @user = current_user
@@ -13,6 +23,28 @@ class BooksController < ApplicationController
   end
 
   def filter_book
+		book_category = params[:subject_id]
+		if book_category == "1"
+			@books = Book.where(subject_id: 1)
+		elsif book_category == "2"
+			@books = Book.where(subject_id: 2)
+    elsif book_category == "3"
+			@books = Book.where(subject_id: 3)
+    elsif book_category == "4"
+			@books = Book.where(subject_id: 4)
+    elsif book_category == "5"
+			@books = Book.where(subject_id: 5)
+		else
+			@books = Book.all
+		end
+
+    respond_to do |format|
+			format.html { }
+			format.js { }
+		end
+	end
+
+  def stud_filter_book
 		book_category = params[:subject_id]
 		if book_category == "1"
 			@books = Book.where(subject_id: 1)

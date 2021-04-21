@@ -1,4 +1,15 @@
 class BorrowedBooksController < ApplicationController
+  before_action :check_user
+
+  def check_user
+    @user = current_user
+    if @user.admin?
+    else
+      flash[:notice] = "You have no power!" 
+      redirect_to root_path
+    end
+  end
+
   def index
     @user = current_user
     @borrowed_books = BorrowedBook.all
