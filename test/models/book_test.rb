@@ -14,6 +14,7 @@
 #  isbn            :string
 #  publisher       :string
 #  borrow_duration :integer
+#  is_available    :boolean          default(TRUE)
 #
 require 'test_helper'
 

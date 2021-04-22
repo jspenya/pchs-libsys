@@ -11,7 +11,7 @@
 <tbody>
   <% borrowed_books.each do |borrowed_book| %>
     <tr>
-      <td><%= borrowed_book.created_at %></td>
+      <td><%= (borrowed_book.created_at).strftime("%B %d, %Y at %l:%M:%S %p") %></td>
       <td><%= borrowed_book.book.title %></td>
       <td><%= borrowed_book.student.lastname %>, <%= borrowed_book.student.firstname %></td>
       <td><%= link_to 'Show', borrowed_book %></td>
