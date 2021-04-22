@@ -2,6 +2,75 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.addbookContainer {
+  text-align: center;
+  margin: 40px 0;
+  a {
+    color: #ffffff;
+    font-weight: 600;
+  }
+  a:hover {
+    text-decoration: none;
+    color: #ffffff;
+  }
+}
+
+.addbookButton {
+  background-color: rgb(5, 141, 0);
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+}
+
+.searchField {
+  display: block;
+}
+
+.searchContainer {
+  text-align: center;
+}
+
+.searchBox {
+  width: 270px;
+  padding: 5px 8px;
+  margin-top: 12px;
+}
+
+.searchfilterButton {
+  display: none;
+}
+
+.filterButton {
+  background-color: #0b3a66;
+  padding: 10px 15px;
+  margin: 0 5px;
+  border-radius: 5px;
+  border: none;
+}
+
+.filterOptions {
+  text-align: center;
+  a {
+    color: #ffffff;
+  }
+  a:hover {
+    text-decoration: none;
+    color: #ffffff;
+  }
+}
+
+.booksTable {
+  margin: 30px 0;
+  a {
+    color: #1361aa;
+  }
+}
+
+.bookTable {
+  background-color: #0b3a66;
+  color: #ffffff;
+}
+
 .booksContainer {
   margin: 30px 0;
 }

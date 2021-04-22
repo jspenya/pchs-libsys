@@ -3,6 +3,7 @@
     <th scope="col">Borrow Date </th>
     <th scope="col">Book Title</th>
     <th scope="col">Student Name</th>
+    <th scope="col">Status</th>
     <th scope="col">Show Book</th>
     <th scope="col"></th>
   </tr>
@@ -14,6 +15,13 @@
       <td><%= (borrowed_book.created_at).strftime("%B %d, %Y at %l:%M:%S %p") %></td>
       <td><%= borrowed_book.book.title %></td>
       <td><%= borrowed_book.student.lastname %>, <%= borrowed_book.student.firstname %></td>
+      <td>
+        <% if borrowed_book.book.is_available? %>
+          Returned
+        <% else %>
+          Currently Borrowed
+        <% end %>
+      </td>
       <td><%= link_to 'Show', borrowed_book %></td>
       <td></td>
     </tr>
