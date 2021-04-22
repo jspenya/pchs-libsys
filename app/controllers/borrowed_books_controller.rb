@@ -24,6 +24,9 @@ class BorrowedBooksController < ApplicationController
 
   def return_book
     @borrowed_book = BorrowedBook.find(params[:id])
+    @borrowed_book.book.is_available = true
+    @borrowed_book.book.save
+    
     if @borrowed_book.update(return_date: DateTime.now)
       flash[:notice] = 'Book is returned sucessfully!'
       redirect_to borrowed_book_path(@borrowed_book.id)
@@ -41,15 +44,15 @@ class BorrowedBooksController < ApplicationController
 
   def create
     @borrowed_book = BorrowedBook.new(borrowed_book_params)
+    @borrowed_book.book.is_available = false
+    @borrowed_book.book.save
 
-    respond_to do |format|
-      if @borrowed_book.save
-        format.html { redirect_to @borrowed_books, notice: "Record successfully created." }
-        format.json { render :index, status: :created, location: @borrowed_books }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @borrowed_book.errors, status: :unprocessable_entity }
-      end
+    if @borrowed_book.save
+      flash[:notice] = "Record saved!"
+      redirect_to borrowed_books_path
+    else
+      flash[:error] = "Record not saveed!"
+      redirect_to borrowed_book_path
     end
   end
 

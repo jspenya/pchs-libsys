@@ -14,7 +14,7 @@ class BooksController < ApplicationController
 
   def index
     @user = current_user
-    @books = Book.all
+    @books = Book.all.order('created_at DESC')
     # @books = @books.paginate(page: params[:page], per_page: 10)
 
     if params[:keyword].present?
@@ -129,11 +129,11 @@ class BooksController < ApplicationController
   private
   # create - permit params
   def book_params
-    params.require(:book).permit(:title, :author, :subject_id, :description, :image)
+    params.require(:book).permit(:title, :author, :subject_id, :description, :image, :isbn)
   end
    # update - permit params
    def book_param
-    params.require(:book).permit(:title, :author, :price, :subject_id, :description, :image, :image_cache)
+    params.require(:book).permit(:title, :author, :price, :subject_id, :description, :image, :image_cache, :isbn)
   end
 
 end

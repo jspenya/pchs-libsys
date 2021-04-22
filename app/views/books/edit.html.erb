@@ -1,6 +1,10 @@
 <h1>Edit book details</h1>
 <%= form_for :book, remote: true, method: :PUT, url: {controller: :books, action: :update} do |f| %>
   <p>
+    <%= f.label :isbn, 'ISBN:' %><br>
+    <%= f.text_field :isbn, required: 'required' %><br>
+  </p>
+  <p>
     <%= f.label :title, 'Title:' %><br>
     <%= f.text_field :title, required: 'required' %><br>
   </p>
@@ -17,10 +21,10 @@
     <%= f.text_area :description %><br>
   </p>
   <p>
-    <%= f.label :image, 'Logo:' %><br>
-    <%= f.file_field :image %><br>
+    <%#= f.label :image, 'Logo:' %><br>
+    <%#= f.file_field :image %><br>
     <!-- Helps to persist the image file across form redisplays -->
-    <%= f.hidden_field :image_cache %>
+    <%#= f.hidden_field :image_cache %>
   </p>
   <%= f.submit %>
 <% end %>

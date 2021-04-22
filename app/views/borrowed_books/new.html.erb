@@ -6,12 +6,10 @@
   </p>
   <p>
     <%= f.label :book, 'Available Books:' %><br>
-    <%= f.select :book_id, options_for_select(@available_books.collect { |b| [b.isbn_and_title, b.id] }), { include_blank: 'Choose a Book' },{ onChange: 'mytest()', id:'bookSelect' } %><br><br>
+    <%= f.select :book_id, options_for_select(@available_books.collect { |b| [b.isbn_and_title, b.id] })%><br><br>
 
-    <div id="testjs"></div>
+    <%# <div id="testjs"></div> %>
 
-    <%= f.label :due_date, 'Due Date:' %>
-    <%= f.date_field :due_date, id:'dueDate', disabled: true %><br>
   </p>
   <%= f.submit %>
 <% end %>
@@ -27,9 +25,9 @@
   //   });
   // })
 
-  function mytest() {
-    var selectVal = $('#bookSelect').val();
-    // $('#testjs').html("<h4>(" + selectVal + ")");
-    alert(selectVal);
-  }
+  // function mytest() {
+  //   var selectVal = $('#bookSelect').val();
+  //   // $('#testjs').html("<h4>(" + selectVal + ")");
+  //   alert(selectVal);
+  // }
 </script>

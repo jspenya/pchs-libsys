@@ -1,6 +1,10 @@
 <h1>Add new book</h1>
 <%= form_for :book, remote: true, url: { controller: :books, action: :create } do |f| %>
   <p>
+    <%= f.label :isbn, 'ISBN:' %><br>
+    <%= f.text_field :isbn %><br>
+  </p>
+  <p>
     <%= f.label :title, 'Title:' %><br>
     <%= f.text_field :title %><br>
   </p>

@@ -43,6 +43,6 @@ class Book < ApplicationRecord
   
 
   def isbn_and_title
-    "#{isbn}, #{title}, #{borrow_duration}"
+    "#{isbn}, #{title}"
   end
 end
