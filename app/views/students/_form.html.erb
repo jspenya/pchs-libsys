@@ -1,37 +1,57 @@
-<%= form_with(model: student, local: true) do |form| %>
-  <% if student.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(student.errors.count, "error") %> prohibited this student from being saved:</h2>
-
-      <ul>
-      <% student.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :lrn %>
-    <%= form.text_field :lrn %>
+    <div class="col-md-6">
+      <div class="inputContainer">
+        <div class="card">
+          <div class="card-body">
+            <div class="addForm">
+            <%= render 'shared/errors', object: student %>
+            <%= form_for :student, remote: true, url: { controller: :students, action: :create } do |f| %>
+              <div class="inputField">
+                <%= f.label :lrn, 'Student LRN:' %>
+              </div>
+              <div class="">
+                <%= f.text_field :lrn %>
+              </div>
+              <div class="inputField">
+                <%= f.label :firstname, 'First Name:' %>
+              </div>
+              <div class="">
+                <%= f.text_field :firstname %>
+              </div>
+              <div class="inputField">
+                <%= f.label :lastname, 'Last Name:' %>
+              </div>
+              <div class="">
+                <%= f.text_field :lastname %>
+              </div>
+              <%= f.submit 'Add Student', class:'addButton' %>
+            <% end %>
+          </div>
+          </div>
+        </div>
+        <div class="csvformContainer">
+          <div class="card">
+            <div class="card-body">
+              <div class="addCsv">
+                <div class="formTitle">
+                  <h4>Add Students via CSV</h4>
+                </div>
+                <%= form_tag import_students_path, multipart: true do %>
+                  <%= file_field_tag :file %>
+                  <div style="float:right;">
+                  <%= submit_tag 'Upload CSV', class: "addbookButton" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :firstname %>
-    <%= form.text_field :firstname %>
-  </div>
-
-  <div class="field">
-    <%= form.label :lastname %>
-    <%= form.text_field :lastname %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
-<h3>Import Students via CSV</h3>
-<%= form_tag import_students_path, multipart: true do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag 'Upload Students' %>
-<% end %>
+</div>

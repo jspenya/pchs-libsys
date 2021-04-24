@@ -20,6 +20,9 @@
             <li class="nav-item active">
               <%= link_to "Borrow a Book", borrowed_books_path(), class:'nav-link' %>
             </li>
+            <li class="nav-item active">
+              <%= link_to "Categories", subjects_path(), class:'nav-link' %>
+            </li>
           <% end %>
           <% if user_signed_in? %>
             <li class="nav-item dropdown">

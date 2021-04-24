@@ -20,6 +20,6 @@ class Student < ApplicationRecord
   end
 
   def fullname
-    "#{lrn}, #{lastname}, #{firstname}"
+    "#{lrn} - #{lastname}, #{firstname}"
   end
 end

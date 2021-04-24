@@ -1,0 +1,21 @@
+<thead class="thead-dark">
+  <tr>
+    <th scope="col">Subject ID</th>
+    <th scope="col">Subject Name</th>
+    <th scope="col"></th>
+    <th scope="col">Action</th>
+    <th scope="col"></th>
+  </tr>
+</thead>
+
+<tbody>
+  <% subjects.each do |subject| %>
+    <tr>
+      <td><%= subject.id %></td>
+      <td><%= subject.name %></td>
+      <td><%= link_to 'Show', subject %></td>
+      <td><%= link_to 'Edit', edit_subject_path(subject) %></td>
+      <td><%= link_to 'Destroy', subject, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</tbody>

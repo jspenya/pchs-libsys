@@ -31,25 +31,18 @@
           <div class="container">
             <div class="row">
               <div class="col">
-                <div class="filterOptions">
-                  <%= link_to filter_book_path(subject_id: "1"), remote: true, class: "filterButton", title: "All Physics books" do %>
-                    Physics (<%= @books.where(subject_id: 1).count %>)
+                <div >
+                  <%= form_tag(books_path, method: :get) do %>
+                    <div class="searchCategory">
+                      Search by Category: <%= select_tag :subject, options_for_select(@subjects.collect { |s| [s.name, s.id] }, params[:subject]), { include_blank: 'Select Subject' } %>
+                      <%= submit_tag 'Search', :class => 'btn btn-primary btn-sm' %>
+                    </div>
                   <% end %>
-                  <%= link_to filter_book_path(subject_id: "2"), remote: true, class: "filterButton", title: "All Math books" do %>
-                    Mathematics (<%= @books.where(subject_id: 2).count %>)
-                  <% end %>
-                  <%= link_to filter_book_path(subject_id: "3"), remote: true, class: "filterButton", title: "All Chemistry books" do %>
-                    Chemistry (<%= @books.where(subject_id: 3).count %>)
-                  <% end %>
-                  <%= link_to filter_book_path(subject_id: "4"), remote: true, class: "filterButton", title: "All Psychology books" do %>
-                    Psychology (<%= @books.where(subject_id: 4).count %>)
-                  <% end %>
-                  <%= link_to filter_book_path(subject_id: "5"), remote: true, class: "filterButton", title: "All Geography books" do %>
-                    Geography (<%= @books.where(subject_id: 5).count %>)
-                  <% end %>
-                  <%= link_to filter_book_path(subject_id: ""), remote: true, class: "filterButton", title: "All books" do %>
-                    Show All (<%= @books.all.count %>)
-                  <% end %>
+                  <div class="filterOptions">
+                    <%= link_to filter_book_path(), remote: true, class: "filterButton", title: "All books" do %>
+                      Show All Books
+                    <% end %>
+                  </div>
                 </div>
               </div>
             </div>
@@ -58,25 +51,18 @@
           <div class="container">
             <div class="row">
               <div class="col">
-                <div class="filterOptions">
-                  <%= link_to stud_filter_book_path(subject_id: "1"), remote: true, class: "", title: "All Physics books" do %>
-                    Physics (<%= @books.where(subject_id: 1).count %>) |
+                <div>
+                  <%= form_tag(books_path, method: :get) do %>
+                    <div class="searchCategory">
+                      Search by Category: <%= select_tag :subject, options_for_select(@subjects.collect { |s| [s.name, s.id] }, params[:subject]), { include_blank: 'Select Subject' } %>
+                      <%= submit_tag 'Search', :class => 'btn btn-primary btn-sm' %>
+                    </div>
                   <% end %>
-                  <%= link_to stud_filter_book_path(subject_id: "2"), remote: true, class: "", title: "All Math books" do %>
-                    Mathematics (<%= @books.where(subject_id: 2).count %>) |
-                  <% end %>
-                  <%= link_to stud_filter_book_path(subject_id: "3"), remote: true, class: "", title: "All Chemistry books" do %>
-                    Chemistry (<%= @books.where(subject_id: 3).count %>) |
-                  <% end %>
-                  <%= link_to stud_filter_book_path(subject_id: "4"), remote: true, class: "", title: "All Psychology books" do %>
-                    Psychology (<%= @books.where(subject_id: 4).count %>) |
-                  <% end %>
-                  <%= link_to stud_filter_book_path(subject_id: "5"), remote: true, class: "", title: "All Geography books" do %>
-                    Geography (<%= @books.where(subject_id: 5).count %>) |
-                  <% end %>
-                  <%= link_to stud_filter_book_path(subject_id: ""), remote: true, class: "", title: "All books" do %>
-                    Show All (<%= @books.all.count %>)
-                  <% end %>
+                  <div class="filterOptions">
+                    <%= link_to stud_filter_book_path(), remote: true, class: "filterButton", title: "All books" do %>
+                      Show All Books
+                    <% end %>
+                  </div>
                 </div>
               </div>
             </div>

@@ -3,21 +3,26 @@
   <div class="row">
     <div class="col">
       <div class="studentsContainer">
-        <h4>Students</h4>
-        <p><%= link_to 'New Student', new_student_path %></p>
-          <div class="searchContainer">
+        <% if @user.admin? %>
+          <div class="addbookContainer">
+            <p><%= link_to "Add a Student", { action: :new }, class:"addbookButton" %></p>
+          </div>
+        <% end %>
+        <div class="searchContainer">
+          <div class="container">
             <%= form_tag(students_path, method: :get) do %>
-              Enter a Keyword: <%= text_field_tag :keyword, params[:keyword], class:"searchBox", placeholder: "LRN or Any Student Name" %>
+              <b>Search a Student</b><br/> <%= text_field_tag :keyword, params[:keyword], class:"searchBox", placeholder: "Search by LRN or Student Name" %> 
               <div class="submitTag">
               <%= submit_tag "Search", class: "searchfilterButton" %>
               </div>
             <% end %>
           </div>
+        </div>
       </div>
       <div class="container">
         <div class="row">
           <div class="col">
-            <table class="studentsTable table table-responsive-md">
+            <table class="studentsTable table table-responsive-md table-striped">
               <%= render partial: "studentsTable", locals: {students: @students} %>
             </table>
           </div>

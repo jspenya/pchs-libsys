@@ -2,6 +2,63 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+
+.formTitle {
+  text-align: center;
+  margin-bottom: 20px;
+  h4 {
+    font-size: 18px;
+  }
+}
+
+.csvformContainer {
+  margin-top: 40px;
+}
+
+.addButton {
+  width: 100%;
+  background-color: rgb(5, 141, 0);
+  color: #ffffff;
+  padding: 8px 0;
+  border: none;
+  letter-spacing: 1px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+.inputField {
+  text-align: left;
+  margin-top: 8px;
+}
+
+.inputContainer {
+  margin: 40px 0;
+}
+
+.addForm {
+  text-align: center;
+  margin: 20px;
+  input[type="text"] {
+    width: 100%;
+  }
+  textarea {
+    width: 100%;
+    height: 140px;
+  }
+  select {
+    padding: 5px 8px;
+  }
+}
+
+.searchCategory {
+  float: left;
+}
+
+.booksCategory {
+  text-align: left;
+}
+
 .addbookContainer {
   text-align: center;
   margin: 40px 0;
@@ -17,6 +74,7 @@
 
 .addbookButton {
   background-color: rgb(5, 141, 0);
+  color: #ffffff;
   padding: 10px 15px;
   border: none;
   border-radius: 5px;
@@ -49,7 +107,7 @@
 }
 
 .filterOptions {
-  text-align: center;
+  float: right;
   a {
     color: #ffffff;
   }

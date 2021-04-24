@@ -15,50 +15,28 @@ class BooksController < ApplicationController
   def index
     @user = current_user
     @books = Book.all.order('created_at DESC')
-    # @books = @books.paginate(page: params[:page], per_page: 10)
+    @subjects = Subject.all
 
     if params[:keyword].present?
 			@books = @books.where('lower(isbn) LIKE :query OR lower(title) LIKE :query OR lower(author) LIKE :query', query: "%#{(params[:keyword]).downcase}%")
 		end
+
+    if params[:subject].present?
+      @books = @books.where('subject_id = :query', query: "#{(params[:subject])}")
+    end
   end
 
   def filter_book
-		book_category = params[:subject_id]
-		if book_category == "1"
-			@books = Book.where(subject_id: 1)
-		elsif book_category == "2"
-			@books = Book.where(subject_id: 2)
-    elsif book_category == "3"
-			@books = Book.where(subject_id: 3)
-    elsif book_category == "4"
-			@books = Book.where(subject_id: 4)
-    elsif book_category == "5"
-			@books = Book.where(subject_id: 5)
-		else
-			@books = Book.all
-		end
+    @books = Book.all.order('created_at DESC')
 
     respond_to do |format|
-			format.html { }
-			format.js { }
-		end
-	end
+      format.html { }
+      format.js { }
+    end
+  end
 
   def stud_filter_book
-		book_category = params[:subject_id]
-		if book_category == "1"
-			@books = Book.where(subject_id: 1)
-		elsif book_category == "2"
-			@books = Book.where(subject_id: 2)
-    elsif book_category == "3"
-			@books = Book.where(subject_id: 3)
-    elsif book_category == "4"
-			@books = Book.where(subject_id: 4)
-    elsif book_category == "5"
-			@books = Book.where(subject_id: 5)
-		else
-			@books = Book.all
-		end
+    @books = Book.all.order('created_at DESC')
 
     respond_to do |format|
 			format.html { }
@@ -85,9 +63,11 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     if @book.save
-      redirect_to action: :show, id: @book
+      flash[:notice] = "Book added successfully!"
+      redirect_to action: :new
     else
       @subjects = Subject.all
+      flash[:error] = "Book not saved!"
       render :new
     end
   end

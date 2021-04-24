@@ -1,33 +1,37 @@
-<h1>Add new record for Borrowing a Book</h1>
-<%= form_for :borrowed_book, remote: true, url: { controller: :borrowed_books, action: :create } do |f| %>
-  <p>
-    <%= f.label :student, 'Student:' %><br>
-    <%= f.select :student_id, options_for_select(@students.collect { |s| [s.fullname, s.id] }), { include_blank: 'Select Student' } %><br>
-  </p>
-  <p>
-    <%= f.label :book, 'Available Books:' %><br>
-    <%= f.select :book_id, options_for_select(@available_books.collect { |b| [b.isbn_and_title, b.id] })%><br><br>
-
-    <%# <div id="testjs"></div> %>
-
-  </p>
-  <%= f.submit %>
-<% end %>
-<%= render 'shared/errors', object: @borrowed_book %>
-<%= link_to 'Back', { action: :index } %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+      <div class="inputContainer">
+        <div class="card">
+          <div class="card-body">
+            <div class="addForm">
+              <%= render 'shared/errors', object: @borrowed_book %>
+              <%= form_for :borrowed_book, remote: true, url: { controller: :borrowed_books, action: :create } do |f| %>
+                <div class="inputField">
+                  <%= f.label :student, 'Student:' %><br>
+                </div>
+                <div style="text-align:left;">
+                  <%= f.select :student_id, options_for_select(@students.collect { |s| [s.fullname, s.id] }), { include_blank: 'Select Student' } %>
+                </div>
+                <div class="inputField">
+                  <%= f.label :book, 'Book Title:' %>
+                </div>
+                <div style="text-align:left;">
+                  <%= f.select :book_id, options_for_select(@available_books.collect { |b| [b.isbn_and_title, b.id] }), { include_blank: 'Select Book' } %>
+                </div>
+                <%= f.submit 'Add Borrow Record', class:'addButton' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+    </div>
+  </div>
+</div>
 
 <script type="text/javascript">
-  // $(function mytest(){
-  //   $('#bookSelect').change(function(e){
-  //     e.preventDefault();
-  //     var quantity = $('.bookSelect').val();
-  //     $('#testjs').html("<h4>(" + quantity + ") ");
-  //   });
-  // })
-
-  // function mytest() {
-  //   var selectVal = $('#bookSelect').val();
-  //   // $('#testjs').html("<h4>(" + selectVal + ")");
-  //   alert(selectVal);
-  // }
 </script>

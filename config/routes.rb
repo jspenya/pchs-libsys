@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     get :show_subjects, on: :collection
     collection { post :import }
   end
+  
+  resources :subjects
 
   resources :borrowed_books
 

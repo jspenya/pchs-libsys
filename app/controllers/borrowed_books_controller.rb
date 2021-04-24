@@ -43,16 +43,15 @@ class BorrowedBooksController < ApplicationController
   end
 
   def create
-    @borrowed_book = BorrowedBook.new(borrowed_book_params)
-    @borrowed_book.book.is_available = false
-    @borrowed_book.book.save
+    @borrowed_book = BorrowedBook.new(borrowed_book_params,)
+    @borrowed_book.book.update(is_available: false)
 
     if @borrowed_book.save
-      flash[:notice] = "Record saved!"
-      redirect_to borrowed_books_path
+      flash[:notice] = "Record added successfully!"
+      redirect_to action: :new
     else
-      flash[:error] = "Record not saveed!"
-      redirect_to borrowed_book_path
+      flash[:error] = "Record not saved!"
+      redirect_to :new
     end
   end
 

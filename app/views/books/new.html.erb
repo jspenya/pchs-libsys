@@ -1,37 +1,69 @@
-<h1>Add new book</h1>
-<%= form_for :book, remote: true, url: { controller: :books, action: :create } do |f| %>
-  <p>
-    <%= f.label :isbn, 'ISBN:' %><br>
-    <%= f.text_field :isbn %><br>
-  </p>
-  <p>
-    <%= f.label :title, 'Title:' %><br>
-    <%= f.text_field :title %><br>
-  </p>
-  <p>
-    <%= f.label :author, 'Author:' %><br>
-    <%= f.text_field :author %><br>
-  </p>
-  <p>
-    <%= f.label :subject, 'Subject:' %><br>
-    <%= f.select :subject_id, options_for_select(@subjects.collect { |s| [s.name, s.id] }), { include_blank: 'Select Subject' } %><br>
-  </p>
-  <p>
-    <%= f.label :description, 'Description:' %><br>
-    <%= f.text_area :description %><br>
-  </p>
-  <p>
-    <%= f.label :image, 'Book Cover(Image):' %><br>
-    <%= f.file_field :image %><br>
-    <!-- Helps to persist the image file across form redisplays -->
-    <%= f.hidden_field :image_cache %>
-  </p>
-  <%= f.submit %>
-<% end %>
-<h3>Import Books via CSV</h3>
-<%= form_tag import_books_path, multipart: true do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag 'Upload Books' %>
-<% end %>
-<%= render 'shared/errors', object: @book %>
-<%= link_to 'Back', { action: :index } %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+      <div class="inputContainer">
+        <div class="card">
+          <div class="card-body">
+            <div class="addForm">
+            <%= render 'shared/errors', object: @book %>
+            <%= form_for :book, remote: true, url: { controller: :books, action: :create } do |f| %>
+              <div class="inputField">
+                <%= f.label :isbn, 'ISBN:' %>
+              </div>
+              <div class="">
+                <%= f.text_field :isbn %>
+              </div>
+              <div class="inputField">
+                <%= f.label :title, 'Title:' %>
+              </div>
+              <div class="">
+                <%= f.text_field :title %>
+              </div>
+              <div class="inputField">
+                <%= f.label :author, 'Author:' %>
+              </div>
+              <div class="">
+                <%= f.text_field :author %>
+              </div>
+              <div class="inputField">
+                <%= f.label :subject, 'Subject:' %>
+              </div>
+              <div style="text-align:left;">
+                <%= f.select :subject_id, options_for_select(@subjects.collect { |s| [s.name, s.id] }), { include_blank: 'Select Subject' } %>
+              </div>
+              <div class="inputField">
+                <%= f.label :description, 'Description:' %>
+              </div>
+              <div class="">
+                <%= f.text_area :description %>
+              </div>
+              <%= f.submit 'Add Book', class:'addButton' %>
+            <% end %>
+          </div>
+          </div>
+        </div>
+        <div class="csvformContainer">
+          <div class="card">
+            <div class="card-body">
+              <div class="addCsv">
+                <div class="formTitle">
+                  <h4>Add Books via CSV</h4>
+                </div>
+                <%= form_tag import_books_path, multipart: true do %>
+                  <%= file_field_tag :file %>
+                  <div style="float:right;">
+                  <%= submit_tag 'Upload CSV', class: "addbookButton" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+    </div>
+  </div>
+</div>
