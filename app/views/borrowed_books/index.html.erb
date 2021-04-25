@@ -3,7 +3,7 @@
     <div class="col">
       <div class="borrowsContainer">
         <div class="addbookContainer">
-          <p><%= link_to "Issue a Book", { action: :new }, class:"addbookButton" %></p>
+          <p><%= link_to "Borrow a Book", { action: :new }, class:"addbookButton" %></p>
         </div>
           <div class="searchContainer">
             <%= form_tag(borrowed_books_path, method: :get) do %>
