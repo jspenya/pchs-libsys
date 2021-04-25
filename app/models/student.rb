@@ -22,4 +22,8 @@ class Student < ApplicationRecord
   def fullname
     "#{lrn} - #{lastname}, #{firstname}"
   end
+
+  def fullname_norm
+    "#{firstname} #{lastname}"
+  end
 end

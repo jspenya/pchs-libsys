@@ -83,6 +83,7 @@ class BooksController < ApplicationController
     if @book.update_attributes(book_param)
       redirect_to action: :show, id: @book
     else
+      flash[:error] = "Error updating book."
       @subjects = Subject.all
       render :edit
     end
@@ -109,11 +110,11 @@ class BooksController < ApplicationController
   private
   # create - permit params
   def book_params
-    params.require(:book).permit(:title, :author, :subject_id, :description, :image, :isbn)
+    params.require(:book).permit(:title, :author, :subject_id, :description, :image, :isbn, :publisher)
   end
    # update - permit params
    def book_param
-    params.require(:book).permit(:title, :author, :price, :subject_id, :description, :image, :image_cache, :isbn)
+    params.require(:book).permit(:title, :author, :price, :subject_id, :description, :image, :image_cache, :isbn, :publisher)
   end
 
 end

@@ -1,32 +1,59 @@
-<h1>Edit book details</h1>
-<%= form_for :book, remote: true, method: :PUT, url: {controller: :books, action: :update} do |f| %>
-  <p>
-    <%= f.label :isbn, 'ISBN:' %><br>
-    <%= f.text_field :isbn, required: 'required' %><br>
-  </p>
-  <p>
-    <%= f.label :title, 'Title:' %><br>
-    <%= f.text_field :title, required: 'required' %><br>
-  </p>
-  <p>
-    <%= f.label :author, 'Author:' %><br>
-    <%= f.text_field :author, required: 'required' %><br>
-  </p>
-  <p>
-    <%= f.label :subject, 'Subject:' %><br>
-    <%= f.select :subject_id, options_for_select(@subjects.collect { |s| [s.name, s.id] }), prompt: true, required: 'required' %><br>
-  </p>
-  <p>
-    <%= f.label :description, 'Description:' %><br>
-    <%= f.text_area :description %><br>
-  </p>
-  <p>
-    <%#= f.label :image, 'Logo:' %><br>
-    <%#= f.file_field :image %><br>
-    <!-- Helps to persist the image file across form redisplays -->
-    <%#= f.hidden_field :image_cache %>
-  </p>
-  <%= f.submit %>
-<% end %>
-<%= render 'shared/errors', object: @book %>
-<%= link_to 'Back', { action: :index } %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+      <div class="inputContainer">
+        <div class="card">
+          <div class="card-body">
+            <div class="addForm">
+            <%= render 'shared/errors', object: @book %>
+            <%= form_for :book, remote: true, method: :PUT, url: {controller: :books, action: :update} do |f| %>
+              <div class="inputField">
+                <%= f.label :isbn, 'ISBN:' %>
+              </div>
+              <div class="">
+                <%= f.text_field :isbn, required: 'required' %>
+              </div>
+              <div class="inputField">
+                <%= f.label :title, 'Title:' %>
+              </div>
+              <div class="">
+                <%= f.text_field :title, required: 'required' %>
+              </div>
+              <div class="inputField">
+                <%= f.label :author, 'Author:' %>
+              </div>
+              <div class="">
+                <%= f.text_field :author, required: 'required' %>
+              </div>
+              <div class="inputField">
+                <%= f.label :publisher, 'Publisher:' %>
+              </div>
+              <div class="">
+                <%= f.text_field :publisher, required: 'required' %>
+              </div>
+              <div class="inputField">
+                <%= f.label :subject, 'Subject:' %>
+              </div>
+              <div style="text-align:left;">
+                <%= f.select :subject_id, options_for_select(@subjects.collect { |s| [s.name, s.id] }), { include_blank: 'Select Subject' }, required: 'required' %>
+              </div>
+              <div class="inputField">
+                <%= f.label :description, 'Description:' %>
+              </div>
+              <div class="">
+                <%= f.text_area :description %>
+              </div>
+              <%= f.submit 'Edit Book', class:'addButton' %>
+            <% end %>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+    </div>
+  </div>
+</div>

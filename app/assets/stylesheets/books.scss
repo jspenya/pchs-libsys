@@ -3,6 +3,33 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+.bookTitle {
+  b {
+    font-size: 20px;
+  }
+}
+
+.availableTitle {
+  padding: 10px 18px;
+  border-radius: 15px;
+  background-color: rgb(5, 141, 0);
+  margin: 0 10px;
+  color: #ffffff;
+}
+
+.unavailableTitle {
+  padding: 10px 18px;
+  border-radius: 15px;
+  margin: 0 10px;
+  background-color: rgb(218, 0, 0);
+  color: #ffffff;
+}
+
+
+
+.showContainer {
+  margin: 40px 0;
+}
 
 .formTitle {
   text-align: center;
@@ -25,6 +52,7 @@
   letter-spacing: 1px;
   border-radius: 8px;
   margin-top: 15px;
+  font-weight: bold;
 }
 
 .inputField {
@@ -41,6 +69,15 @@
   margin: 20px;
   input[type="text"] {
     width: 100%;
+    padding: 3px 10px;
+  }
+  input[type="email"] {
+    width: 100%;
+    padding: 3px 10px;
+  }
+  input[type="password"] {
+    width: 100%;
+    padding: 3px 10px;
   }
   textarea {
     width: 100%;
@@ -123,6 +160,14 @@
     color: #1361aa;
   }
 }
+
+.booksTableForStudents {
+  margin: 30px 0;
+  a {
+    color: #1361aa;
+  }
+}
+
 
 .bookTable {
   background-color: #0b3a66;

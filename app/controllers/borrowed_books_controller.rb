@@ -12,7 +12,7 @@ class BorrowedBooksController < ApplicationController
 
   def index
     @user = current_user
-    @borrowed_books = BorrowedBook.all
+    @borrowed_books = BorrowedBook.all.order('created_at DESC')
   end
 
   def new
@@ -24,10 +24,9 @@ class BorrowedBooksController < ApplicationController
 
   def return_book
     @borrowed_book = BorrowedBook.find(params[:id])
-    @borrowed_book.book.is_available = true
-    @borrowed_book.book.save
     
     if @borrowed_book.update(return_date: DateTime.now)
+      @borrowed_book.book.update(is_available: true)
       flash[:notice] = 'Book is returned sucessfully!'
       redirect_to borrowed_book_path(@borrowed_book.id)
     else
@@ -39,7 +38,7 @@ class BorrowedBooksController < ApplicationController
   def show
     @user = current_user
     @borrowed_book = BorrowedBook.find(params[:id])
-    @due = @borrowed_book.created_at + (@borrowed_book.book.borrow_duration).day
+    # @due = @borrowed_book.created_at + (@borrowed_book.book.borrow_duration).day
   end
 
   def create

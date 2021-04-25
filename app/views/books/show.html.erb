@@ -1,15 +1,60 @@
-<h1><%= @book.title %></h1>
-<strong>Author: </strong>
-<p> <%= @book.author %></p>
-<strong>Subject: </strong>
-<p> <%= link_to @book.subject.name, action: :show_subjects, id: @book.subject.id %></p>
-<strong>Created Date: </strong>
-<p> <%= @book.created_at %></p>
-<strong>Description: </strong>
-<p><%= @book.description %></p>
-<% if @book.image? %>
-<strong>Image: </strong>
-<p><%= image_tag(@book.image.thumb.url, alt: 'Image') %></p>
-<% end %>
-<hr/>
-<%= link_to 'Back', { action: :index } %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+      <div class="showContainer">
+        <div class="card">
+          <div class="card-header">
+            <div class="bookTitle">
+              <b><%= @book.title %></b>
+              <% if @book.is_available %>
+              <span class="availableTitle">
+                <b>Available</b>
+              </span>
+              <% else %>
+                <span class="unavailableTitle">
+                  <b>Unavailable</b>
+                </span>
+              <% end %>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="showDetails">
+              <strong>Author: </strong>
+              <p> <%= @book.author %></p>
+              <strong>ISBN: </strong>
+              <p> <%= @book.isbn %></p>
+              <% if @book.publisher.present? %>
+                <strong>Publisher: </strong>
+                <p> <%= @book.publisher %></p>
+              <% end %>
+              <strong>Subject: </strong>
+              <p> <%= link_to @book.subject.name, action: :show_subjects, id: @book.subject.id %></p>
+              <strong>Added on: </strong>
+              <p> <%= (@book.created_at).strftime("%B %d, %Y at %l:%M:%S %p") %></p>
+              <% if @book.borrow_duration.present? %>
+                <strong>Book borrow Duration: </strong>
+                <p><%= @book.borrow_duration %></p>
+              <% end %>
+              <strong>Description: </strong>
+              <p><%= @book.description %></p>
+              <% unless @book.is_available? %>
+                <strong>Current Borrower: </strong>
+                <p><%= @book.borrowed_books.first.student.fullname_norm %>, ISBN: <%= @book.borrowed_books.first.student.lrn %></p>
+              <% end %>
+              <% if @book.image? %>
+              <strong>Image: </strong>
+              <p><%= image_tag(@book.image.thumb.url, alt: 'Image') %></p>
+              <% end %>
+              <hr/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+    </div>
+  </div>
+</div>
+
