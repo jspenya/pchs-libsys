@@ -14,7 +14,8 @@
         </div>
       <% end %>
       <% if @books.blank? %>
-        <p>There are no books currently in the system.</p>
+        <p>There are no books currently or no books found with search.</p>
+        <%= link_to 'Back to Books', books_path %>
       <% else %>
         <div class="searchContainer">
           <div class="container">
@@ -35,7 +36,7 @@
                   <%= form_tag(books_path, method: :get) do %>
                     <div class="searchCategory">
                       Search by Category: <%= select_tag :subject, options_for_select(@subjects.collect { |s| [s.name, s.id] }, params[:subject]), { include_blank: 'Select Subject' } %>
-                      <%= submit_tag 'Search', :class => 'btn btn-primary btn-sm' %>
+                      <%= submit_tag 'Search', :class => 'filtercategoryButton' %>
                     </div>
                   <% end %>
                   <div class="filterOptions">
@@ -76,9 +77,33 @@
                     <%= render partial: "booksTable", locals: {books: @books} %>
                 </table>
               <% else %>
-                <table class="booksTableForStudents table table-responsive-md">
-                  <%= render partial: "booksTableForStudents", locals: {books: @books} %>
-                </table>
+                <div class="row row-cols-1 row-cols-md-3">
+                  <% @books.each do |book| %>
+                    <div class="col-md-3">
+                      <div class="bookcardContainer">
+                        <div class="card">
+                          <% if book.is_available %>
+                            <div class="card-header availableHeader">
+                              <b><%= book.title %></b>
+                            </div>
+                          <% else %>
+                            <div class="card-header unavailableHeader">
+                              <b><%= book.title %></b>
+                            </div>
+                          <% end %>
+                          <div class="card-body">
+                            <b>ISBN:</b>
+                            <%= book.isbn %><br/>
+                            <b>Author:</b>
+                            <%= book.author %><br/>
+                            <b>Shelf Number:</b>
+                            <%= book.shelf_number %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
               <% end %>
             </div>
           </div>

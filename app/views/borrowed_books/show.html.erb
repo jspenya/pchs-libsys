@@ -25,11 +25,12 @@
               <p><%= (@borrowed_book.created_at).strftime("%B %d, %Y at %l:%M:%S %p") %></p>
               <strong>Borrower: </strong>
               <p><%= link_to @borrowed_book.student.fullname, action: :show, controller: :students, id: @borrowed_book.student_id %></p>
-              <strong>Return Date: </strong>
               <% if @borrowed_book.return_date? %>
-                <p> <%= (@borrowed_book.return_date).strftime("%B %d, %Y") %></p>
+                <strong>Return Date: </strong>
+                <p> <%= (@borrowed_book.return_date).strftime("%B %d, %Y at %l:%M:%S %p") %></p>
               <% else %>
-                <p>Book is unreturned.</p>
+                <strong>Book is due on: </strong>
+                <p><%= (@due).strftime("%B %d, %Y at %l:%M:%S %p") %></p>
               <% end %>
               <hr/>
               <% if !@borrowed_book.return_date? %>

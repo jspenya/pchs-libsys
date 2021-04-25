@@ -34,9 +34,11 @@
               <strong>Added on: </strong>
               <p> <%= (@book.created_at).strftime("%B %d, %Y at %l:%M:%S %p") %></p>
               <% if @book.borrow_duration.present? %>
-                <strong>Book borrow Duration: </strong>
-                <p><%= @book.borrow_duration %></p>
+                <strong>Maximum Borrow Days: </strong>
+                <p><%= @book.borrow_duration %> days</p>
               <% end %>
+              <strong>Shelf Number: </strong>
+              <p><%= @book.shelf_number %></p>
               <strong>Description: </strong>
               <p><%= @book.description %></p>
               <% unless @book.is_available? %>

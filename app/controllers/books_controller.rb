@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   # protect_from_forgery with: :null_session  # remove csrf authentication on http requests
-  before_action :check_user, except: [:index, :stud_filter_book]
+  before_action :check_user, except: [:index, :stud_filter_book, :send_details]
   require 'csv' 
 
   def check_user
@@ -62,6 +62,8 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
+    @book.update(borrow_duration: 56)
+    
     if @book.save
       flash[:notice] = "Book added successfully!"
       redirect_to action: :new
@@ -110,11 +112,11 @@ class BooksController < ApplicationController
   private
   # create - permit params
   def book_params
-    params.require(:book).permit(:title, :author, :subject_id, :description, :image, :isbn, :publisher)
+    params.require(:book).permit(:title, :author, :subject_id, :description, :image, :isbn, :publisher, :book_duration, :shelf_number)
   end
    # update - permit params
    def book_param
-    params.require(:book).permit(:title, :author, :price, :subject_id, :description, :image, :image_cache, :isbn, :publisher)
+    params.require(:book).permit(:title, :author, :price, :subject_id, :description, :image, :image_cache, :isbn, :publisher, :book_duration, :shelf_number)
   end
 
 end

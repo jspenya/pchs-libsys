@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_22_073452) do
+ActiveRecord::Schema.define(version: 2021_04_25_185636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2021_04_22_073452) do
     t.string "publisher"
     t.integer "borrow_duration"
     t.boolean "is_available", default: true
+    t.string "shelf_number"
     t.index ["isbn"], name: "index_books_on_isbn"
   end
 

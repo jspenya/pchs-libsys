@@ -15,6 +15,7 @@
 #  publisher       :string
 #  borrow_duration :integer
 #  is_available    :boolean          default(TRUE)
+#  shelf_number    :string
 #
 require 'test_helper'
 

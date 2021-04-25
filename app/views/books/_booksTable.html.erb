@@ -18,7 +18,7 @@
         <td><%= book.author %></td>
         <td>
           <% if book.is_available? %>
-            Available
+            <span class="tablecellAvailable">Available</span>
           <% else %>
             Not Available
           <% end %>

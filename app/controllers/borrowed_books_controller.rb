@@ -13,6 +13,12 @@ class BorrowedBooksController < ApplicationController
   def index
     @user = current_user
     @borrowed_books = BorrowedBook.all.order('created_at DESC')
+
+    if params[:keyword].present?
+      searched_date = Date.parse(params[:keyword])
+      # @borrowed_books = @borrowed_books.where('lower(created_at) LIKE :query', query: "%#{(params[:keyword]).downcase}%")
+      @borrowed_books = @borrowed_books.where(created_at: searched_date.beginning_of_day..searched_date.end_of_day)
+    end
   end
 
   def new
@@ -38,19 +44,24 @@ class BorrowedBooksController < ApplicationController
   def show
     @user = current_user
     @borrowed_book = BorrowedBook.find(params[:id])
-    # @due = @borrowed_book.created_at + (@borrowed_book.book.borrow_duration).day
+    @due = @borrowed_book.created_at + (@borrowed_book.book.borrow_duration).day
   end
 
   def create
     @borrowed_book = BorrowedBook.new(borrowed_book_params,)
     @borrowed_book.book.update(is_available: false)
 
-    if @borrowed_book.save
-      flash[:notice] = "Record added successfully!"
-      redirect_to action: :new
+    # student = @borrowed_book.student_id
+    if @borrowed_book.student.borrowed_books.not_returned.count > 1
+      redirect_to borrowed_books_path, notice: "Borrow failed. Student: #{@borrowed_book.student.fullname_norm} has too many borrowed books."
     else
-      flash[:error] = "Record not saved!"
-      redirect_to :new
+      if @borrowed_book.save
+        flash[:notice] = "Record added successfully!"
+        redirect_to action: :new
+      else
+        flash[:error] = "Record not saved!"
+        redirect_to :new
+      end
     end
   end
 

@@ -3,6 +3,33 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+
+
+.unavailableHeader {
+  background-color:rgba(141, 0, 0, 0.822) !important;
+  color: #ffffff;
+}
+
+.availableHeader {
+  background-color:rgba(5, 141, 0, 0.616) !important;
+  // color: #ffffff;
+}
+
+.bookcardContainer {
+  margin: 15px 0;
+}
+
+.showsubjectContainer {
+  margin-top: 40px;
+}
+
+.tablecellAvailable {
+  background-color: green;
+  border-radius: 8px;
+  padding: 5px 8px;
+  color: #ffffff;
+}
+
 .bookTitle {
   b {
     font-size: 20px;
@@ -90,6 +117,9 @@
 
 .searchCategory {
   float: left;
+  select {
+    padding: 6px 3px;
+  }
 }
 
 .booksCategory {
@@ -141,6 +171,15 @@
   margin: 0 5px;
   border-radius: 5px;
   border: none;
+}
+
+.filtercategoryButton {
+  background-color: #0b3a66;
+  padding: 5px 15px;
+  margin: 0 5px;
+  border-radius: 5px;
+  border: none;
+  color: #ffffff;
 }
 
 .filterOptions {

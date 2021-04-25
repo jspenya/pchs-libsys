@@ -15,6 +15,7 @@
 #  publisher       :string
 #  borrow_duration :integer
 #  is_available    :boolean          default(TRUE)
+#  shelf_number    :string
 #
 class Book < ApplicationRecord
   belongs_to :subject

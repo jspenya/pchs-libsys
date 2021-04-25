@@ -13,13 +13,13 @@
                   <%= f.label :student, 'Student:' %><br>
                 </div>
                 <div style="text-align:left;">
-                  <%= f.select :student_id, options_for_select(@students.collect { |s| [s.fullname, s.id] }), { include_blank: 'Select Student' } %>
+                  <%= f.select :student_id, options_for_select(@students.collect { |s| [s.fullname, s.id] }), { include_blank: 'Select Student' }, required: 'true' %>
                 </div>
                 <div class="inputField">
                   <%= f.label :book, 'Book Title:' %>
                 </div>
                 <div style="text-align:left;">
-                  <%= f.select :book_id, options_for_select(@available_books.collect { |b| [b.isbn_and_title, b.id] }), { include_blank: 'Select Book' } %>
+                  <%= f.select :book_id, options_for_select(@available_books.collect { |b| [b.isbn_and_title, b.id] }), { include_blank: 'Select Book' }, required: 'true' %>
                 </div>
                 <%= f.submit 'Add Borrow Record', class:'addButton' %>
               <% end %>

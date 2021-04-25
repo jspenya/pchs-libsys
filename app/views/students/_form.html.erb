@@ -13,19 +13,19 @@
                 <%= f.label :lrn, 'Student LRN:' %>
               </div>
               <div class="">
-                <%= f.text_field :lrn %>
+                <%= f.text_field :lrn, required: 'required' %>
               </div>
               <div class="inputField">
                 <%= f.label :firstname, 'First Name:' %>
               </div>
               <div class="">
-                <%= f.text_field :firstname %>
+                <%= f.text_field :firstname, required: 'required' %>
               </div>
               <div class="inputField">
                 <%= f.label :lastname, 'Last Name:' %>
               </div>
               <div class="">
-                <%= f.text_field :lastname %>
+                <%= f.text_field :lastname, required: 'required' %>
               </div>
               <%= f.submit 'Add Student', class:'addButton' %>
             <% end %>

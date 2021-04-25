@@ -2,11 +2,12 @@
   <div class="row">
     <div class="col">
       <div class="borrowsContainer">
-        <h4>Borrowed Books Records</h4>
-        <p><%= link_to 'New Record', new_borrowed_book_path %></p>
+        <div class="addbookContainer">
+          <p><%= link_to "Issue a Book", { action: :new }, class:"addbookButton" %></p>
+        </div>
           <div class="searchContainer">
             <%= form_tag(borrowed_books_path, method: :get) do %>
-              Enter a Keyword: <%= text_field_tag :keyword, params[:keyword], class:"searchBox", placeholder: "Borrow Date/Student name/Book Title" %>
+              <b>Search by Borrowed Date:</b><br/> <%= text_field_tag :keyword, params[:keyword], class:"searchBox", placeholder: "YYYY-MM-DD" %>
               <div class="submitTag">
               <%= submit_tag "Search", class: "searchfilterButton" %>
               </div>
