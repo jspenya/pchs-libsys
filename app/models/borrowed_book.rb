@@ -19,4 +19,25 @@ class BorrowedBook < ApplicationRecord
   scope :returned, ->{ where( id: where.not(return_date:nil))}
 
   scope :overdue, -> { not_returned.where( "due_date < ?", Date.today ) }
+
+  def receipt
+    Receipts::Receipt.new(
+      id: id,
+      subheading: "Hi #{student.firstname}! This is your receipt for Borrow Record ##{id}.",
+      product: "this book",
+      company: {
+        name: "Pangantucan Community High School",
+        address: "Overview Village, Poblacion\nPangantucan, Bukidnon ",
+        email: "0917-811-0150",
+        logo: Rails.root.join("app/assets/images/pchs.png")
+      },
+      line_items: [
+        ["Date Borrowed",           created_at.strftime("%B %d, %Y at %l:%M:%S %p")],
+        ["Borrower's Name", "#{student.fullname_norm} (#{student.lrn})"],
+        ["Book Title",        book.title],
+        ["ISBN",         book.isbn],
+        ["Return before", due_date.strftime("%B %d, %Y at %l:%M:%S %p")]
+      ],
+    )
+  end
 end

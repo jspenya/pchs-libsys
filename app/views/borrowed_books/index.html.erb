@@ -17,13 +17,26 @@
         <div class="container">
           <div class="row">
             <div class="col">
-              <table class="studentsTable table table-responsive-md">
+              <div class="filterOptionsBorrowed">
+                <%= link_to filter_books_path(book_status: "borrowed"), remote: true, class: "filterButton", title: "All borrowed books" do %>
+                  Borrowed
+                <% end %>
+                <%= link_to filter_books_path(book_status: "returned"), remote: true, class: "filterButton", title: "All returned books" do %>
+                  Returned
+                <% end %>
+                <%= link_to filter_books_path(book_status: "overdue"), remote: true, class: "filterButton", title: "All overdue books" do %>
+                  Overdue
+                <% end %>
+                <%= link_to filter_books_path(book_status: "all"), remote: true, class: "filterButton", title: "All borrowed books" do %>
+                  Show All
+                <% end %>
+              </div>
+              <table class="booksTable table table-responsive-md">
                 <%= render partial: "borrowedbooksTable", locals: {borrowed_books: @borrowed_books} %>
               </table>
             </div>
           </div>
         </div>
-        <%#= will_paginate @students %>
     </div>
   </div>
 </div>

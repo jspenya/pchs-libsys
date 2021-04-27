@@ -63,10 +63,34 @@ class BorrowedBooksController < ApplicationController
     end
   end
 
+  def filter_books
+    book_status = params[:book_status]
+		if book_status == "borrowed"
+			@borrowed_books = BorrowedBook.all.not_returned.order('created_at DESC')
+		elsif book_status == "returned"
+			@borrowed_books = BorrowedBook.all.returned.order('created_at DESC')
+    elsif book_status == "overdue"
+			@borrowed_books = BorrowedBook.all.overdue.order('created_at DESC')
+		else
+			@borrowed_books = BorrowedBook.all.order('created_at DESC')
+		end
+  end
+
   def show
     @user = current_user
     @borrowed_book = BorrowedBook.find(params[:id])
     @due = @borrowed_book.created_at + (@borrowed_book.book.borrow_duration).day
+
+    respond_to do |format|
+      format.html
+      format.json
+      format.pdf { 
+        send_data @borrowed_book.receipt.render,
+        filename: "#{@borrowed_book.created_at.strftime("%Y-%m-%d")}-pchslibsys-receipt.pdf",
+        type: "application/pdf",
+        disposition: :inline
+      }
+    end
   end
 
   def create
@@ -81,7 +105,7 @@ class BorrowedBooksController < ApplicationController
         book_due = @borrowed_book.created_at + (@borrowed_book.book.borrow_duration).day
         @borrowed_book.update(due_date: book_due)
         flash[:notice] = "Record added successfully!"
-        redirect_to action: :new
+        redirect_to action: :show, id: @borrowed_book
       else
         flash[:error] = "Record not saved!"
         redirect_to :new

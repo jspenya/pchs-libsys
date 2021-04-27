@@ -73,7 +73,9 @@
                         <div class="card">
                           <% if book.is_available %>
                             <div class="card-header availableHeader">
-                              <b><%= book.title %></b>
+                              <%= link_to book do %>
+                                <span class='cardBookLink'><%= book.title %></span>
+                              <% end %>
                             </div>
                           <% else %>
                             <div class="card-header unavailableHeader">

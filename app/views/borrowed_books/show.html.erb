@@ -34,8 +34,11 @@
               <% end %>
               <hr/>
               <% if !@borrowed_book.return_date? %>
-                <%= link_to 'Confirm Book Return', { action: :return_book, id: @borrowed_book.id }, data: { confirm: 'Are you sure?' } %>
+                <%= link_to 'Confirm Book Return', { action: :return_book, id: @borrowed_book.id }, data: { confirm: 'Are you sure?' }, class:'confirmreturnButton' %>
               <% end %>
+              <div style="margin-top:20px;">
+                <%= link_to "Download Receipt", borrowed_book_path(@borrowed_book, format: :pdf), target: :_blank %>
+              </div>
             </div>
           </div>
         </div>

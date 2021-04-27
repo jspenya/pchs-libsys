@@ -2,6 +2,34 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+.confirmreturnButton {
+  padding: 10px 9px;
+  background-color: green;
+  color: #ffffff !important;
+  font-weight: bold;
+  border-radius: 7px;
+  text-decoration: none !important;
+}
+
+.tablecellBorrowed {
+  background-color: rgb(223, 164, 0);
+  border-radius: 8px;
+  padding: 5px 8px;
+  color: #ffffff;
+}
+
+.filterOptionsBorrowed {
+  margin: 20px 0;
+  a {
+    color: #ffffff;
+  }
+  a:hover {
+    text-decoration: none;
+    color: #ffffff;
+  }
+}
+
 .borrowsContainer {
   margin: 30px 0;
 }

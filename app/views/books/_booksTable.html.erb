@@ -21,7 +21,9 @@
           <% if book.is_available? %>
             <span class="tablecellAvailable">Available</span>
           <% else %>
-            Not Available
+            <span class="tablecellUnavailable">
+              Not Available
+            </span>
           <% end %>
         </td>
         <td><%= link_to 'Show', book %></td>

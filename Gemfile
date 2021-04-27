@@ -5,6 +5,8 @@ ruby '2.6.7'
 
 gem 'rails-autocomplete'
 
+gem 'receipts'
+
 gem 'will_paginate', '~> 3.1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

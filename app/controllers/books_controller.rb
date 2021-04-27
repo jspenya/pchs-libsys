@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   # protect_from_forgery with: :null_session  # remove csrf authentication on http requests
-  before_action :check_user, except: [:index, :stud_filter_book, :send_details]
+  before_action :check_user, except: [:index, :show, :stud_filter_book, :send_details]
   require 'csv'
 
   autocomplete :book, :isbn

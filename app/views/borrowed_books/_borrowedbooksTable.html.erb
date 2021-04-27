@@ -17,9 +17,11 @@
       <td><%= borrowed_book.student.lastname %>, <%= borrowed_book.student.firstname %></td>
       <td>
         <% if borrowed_book.book.is_available? %>
-          Returned
+          <span class="tablecellAvailable">Returned</span>
         <% else %>
-          Currently Borrowed
+          <span class="tablecellBorrowed">
+            Currently Borrowed
+          </span>
         <% end %>
       </td>
       <td><%= link_to 'Show', borrowed_book %></td>

@@ -137,8 +137,14 @@ GEM
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    pdf-core (0.9.0)
     pg (1.2.3)
     popper_js (1.16.0)
+    prawn (2.4.0)
+      pdf-core (~> 0.9.0)
+      ttfunk (~> 1.7)
+    prawn-table (0.2.2)
+      prawn (>= 1.3.0, < 3.0.0)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -180,6 +186,9 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    receipts (1.0.4)
+      prawn (>= 1.3.0, < 3.0.0)
+      prawn-table (~> 0.2.1)
     redis (4.2.5)
     regexp_parser (2.1.1)
     responders (3.0.1)
@@ -228,6 +237,7 @@ GEM
     thor (1.1.0)
     thread_safe (0.3.6)
     tilt (2.0.10)
+    ttfunk (1.7.0)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
@@ -273,6 +283,7 @@ DEPENDENCIES
   puma (~> 3.12)
   rails (~> 5.2.0)
   rails-autocomplete
+  receipts
   sass-rails (~> 5.0)
   selenium-webdriver
   sidekiq
