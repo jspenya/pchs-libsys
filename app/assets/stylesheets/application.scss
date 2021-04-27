@@ -17,6 +17,7 @@
 // @import "bootstrap-sprockets";
 @import "bootstrap";
 
+
 .pagination {
   display: block;
 }
@@ -61,3 +62,5 @@
 .loginBtn {
   margin: 10px 0;
 }
+
+.ui-helper-hidden-accessible { display: none; }

@@ -10,12 +10,16 @@ Rails.application.routes.draw do
     get :send_details, on: :member
     get :delete, on: :member
     get :show_subjects, on: :collection
+    # get :autocomplete_book_isbn, :on => :collection
+    get :autocomplete_book, :on => :collection
     collection { post :import }
   end
   
   resources :subjects
 
-  resources :borrowed_books
+  resources :borrowed_books do
+    get :autocomplete_book, :on => :collection
+  end
 
   devise_scope :user do
     # root to: "devise/sessions#new"

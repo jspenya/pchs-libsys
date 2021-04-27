@@ -1,12 +1,6 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <%# <h4>Subject Categories</h4> %>
-      <%# <ul id="subjects"> %>
-      <%# Subject.all.each do |c| %>
-      <%# <li><%= link_to c.name, action: :show_subjects, id: c.id</li>  %>
-      <%# end %>
-      <%# </ul> %>
       <div class="booksContainer">
       <% if @user.admin? %>
         <div class="addbookContainer">
@@ -17,17 +11,6 @@
         <p>There are no books currently or no books found with search.</p>
         <%= link_to 'Back to Books', books_path %>
       <% else %>
-        <div class="searchContainer">
-          <div class="container">
-            <%= form_tag(books_path, method: :get) do %>
-              <b>Looking for a book?</b><br/> <%= text_field_tag :keyword, params[:keyword], class:"searchBox", placeholder: "ISBN or Book Title or Author Name" %> 
-              <div class="submitTag">
-              <%= submit_tag "Search", class: "searchfilterButton" %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
         <% if @user.admin? %>
           <div class="container">
             <div class="row">
@@ -40,8 +23,11 @@
                     </div>
                   <% end %>
                   <div class="filterOptions">
-                    <%= link_to filter_book_path(), remote: true, class: "filterButton", title: "All books" do %>
-                      Show All Books
+                    <%= form_tag(books_path, method: :get) do %>
+                      <%= text_field_tag :keyword, params[:keyword], class:"searchBox", placeholder: "ISBN or Book Title or Author Name" %> 
+                      <div class="submitTag">
+                      <%= submit_tag "Search", class: "searchfilterButton" %>
+                      </div>
                     <% end %>
                   </div>
                 </div>
@@ -60,8 +46,11 @@
                     </div>
                   <% end %>
                   <div class="filterOptions">
-                    <%= link_to stud_filter_book_path(), remote: true, class: "filterButton", title: "All books" do %>
-                      Show All Books
+                    <%= form_tag(books_path, method: :get) do %>
+                      <%= text_field_tag :keyword, params[:keyword], class:"searchBox", placeholder: "ISBN or Book Title or Author Name" %> 
+                      <div class="submitTag">
+                      <%= submit_tag "Search", class: "searchfilterButton" %>
+                      </div>
                     <% end %>
                   </div>
                 </div>
@@ -73,9 +62,9 @@
           <div class="row">
             <div class="col">
               <% if @user.admin? %>
-                <table class="booksTable table table-responsive-md table-striped">
-                    <%= render partial: "booksTable", locals: {books: @books} %>
-                </table>
+                <div id="booksTable">
+                  <%= render partial: "booksTable", locals: {books: @books} %>
+                </div>
               <% else %>
                 <div class="row row-cols-1 row-cols-md-3">
                   <% @books.each do |book| %>

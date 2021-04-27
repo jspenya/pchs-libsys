@@ -1,17 +1,52 @@
-<p>
-  <strong>Lrn:</strong>
-  <%= @student.lrn %>
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+      <div class="showContainer">
+        <div class="card">
+          <div class="card-header">
+            <div class="bookTitle">
+              <strong><%= @student.fullname_norm %></strong> | <%= @student.lrn %>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="showDetails">
+              <div style="text-align:center;margin-bottom:20px;"><strong>Borrowed Book History</strong></div>
+              <% if @borrowed_books.present? %>
+                <strong>Currently Borrowed Books:</strong>
+                <% @borrowed_books.each do |bd| %>
+                  <div class="row dueBooks">
+                    <div class="col-md-6">
+                      <strong>Book Title: </strong><p><%= bd.book.title %></p>
+                    </div>
+                    <div class="col-md-6">
+                      <strong>Due Date: (in <%= distance_of_time_in_words(Date.today, bd.due_date)  %>)</strong><p><%= bd.due_date.strftime("%B %d, %Y at %l:%M:%S %p") %></p>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+              <% if @borrowed_returned.present? %>
+                <strong>Returned Books:</strong>
+                <% @borrowed_returned.each do |br| %>
+                  <div class="row returnedBooks">
+                    <div class="col-md-6">
+                      <strong>Book Title: </strong><p><%= br.book.title %></p>
+                    </div>
+                    <div class="col-md-6">
+                      <strong>Return Date: </strong><p><%= br.return_date.strftime("%B %d, %Y at %l:%M:%S %p") %></p>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Firstname:</strong>
-  <%= @student.firstname %>
-</p>
 
-<p>
-  <strong>Lastname:</strong>
-  <%= @student.lastname %>
-</p>
-
-<%= link_to 'Edit', edit_student_path(@student) %> |
-<%= link_to 'Back', students_path %>

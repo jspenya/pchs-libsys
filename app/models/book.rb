@@ -26,12 +26,10 @@ class Book < ApplicationRecord
   mount_uploader :image, ImageUploader
 
   validates_presence_of :title
-  # validates_numericality_of :price, message: 'Price should be numeric'
-  # validates :image, file_size: { less_than: 1.megabytes }
 
   scope :borrowed, ->{where( id: BorrowedBook.not_returned.pluck(:book_id))}
   
-  scope :not_borrowed, ->{ Book.all - Book.borrowed}
+  scope :not_borrowed, ->{ Book.all.where.not(id: Book.borrowed)}
   
   scope :returned, ->{where( id: BorrowedBook.returned.pluck(:book_id))}
   # Ex:- scope :active, -> {where(:active => true)}
@@ -44,6 +42,6 @@ class Book < ApplicationRecord
   
 
   def isbn_and_title
-    "#{isbn}, #{title}"
+    "#{isbn} #{title}"
   end
 end

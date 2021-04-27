@@ -1,7 +1,9 @@
 class BooksController < ApplicationController
   # protect_from_forgery with: :null_session  # remove csrf authentication on http requests
   before_action :check_user, except: [:index, :stud_filter_book, :send_details]
-  require 'csv' 
+  require 'csv'
+
+  autocomplete :book, :isbn
 
   def check_user
     @user = current_user
@@ -14,6 +16,7 @@ class BooksController < ApplicationController
 
   def index
     @user = current_user
+    @book = Book.new
     @books = Book.all.order('created_at DESC')
     @subjects = Subject.all
 
@@ -24,6 +27,27 @@ class BooksController < ApplicationController
     if params[:subject].present?
       @books = @books.where('subject_id = :query', query: "#{(params[:subject])}")
     end
+
+    if (term = params[:term]).present?
+      terms = make_terms_from term
+      @books = @books.where(terms)
+    end
+
+    respond_to do |format|
+      format.html { }
+      format.js {  }
+    end
+  end
+
+  def autocomplete_book
+    term = params[:term]
+    terms = make_terms_from term
+    @books = Book.not_borrowed.where(terms)
+    render :json => @books.map { |book| {:id => book.id, :label => book.isbn_and_title, :value => book.isbn_and_title} }
+  end
+  
+  def make_terms_from term
+    terms = term.split.map{|t| "isbn ilike '%%%s%%'" % t}.join(" or ")    
   end
 
   def filter_book

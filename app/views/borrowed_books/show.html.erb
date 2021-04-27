@@ -30,7 +30,7 @@
                 <p> <%= (@borrowed_book.return_date).strftime("%B %d, %Y at %l:%M:%S %p") %></p>
               <% else %>
                 <strong>Book is due on: </strong>
-                <p><%= (@due).strftime("%B %d, %Y at %l:%M:%S %p") %></p>
+                <p><%= (@borrowed_book.due_date).strftime("%B %d, %Y at %l:%M:%S %p") %></p>
               <% end %>
               <hr/>
               <% if !@borrowed_book.return_date? %>

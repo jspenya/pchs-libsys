@@ -1,5 +1,6 @@
 class BorrowedBooksController < ApplicationController
   before_action :check_user
+  autocomplete :borrowed_book, :term
 
   def check_user
     @user = current_user
@@ -21,11 +22,32 @@ class BorrowedBooksController < ApplicationController
     end
   end
 
+  # def autocomplete
+  #   term = params[:term]
+  #   @books = Book.not_borrowed.where('isbn LIKE' term)
+  #   render :json => @books.map { |book| {:id => book.id, :label => book.isbn_and_title, :value => book.isbn_and_title} }
+  # end
+
+  def autocomplete_book
+    term = params[:term]
+    terms = make_terms_from term
+    @books = Book.not_borrowed.where(terms)
+    render :json => @books.map { |book| {:id => book.id, :label => book.isbn_and_title, :value => book.isbn_and_title} }
+  end
+  
+  def make_terms_from term
+    terms = term.split.map{|t| "isbn ilike '%%%s%%'" % t}.join(" or ")    
+  end
+  
   def new
     @user = current_user
     @borrowed_book = BorrowedBook.new
     @available_books = Book.not_borrowed
     @students = Student.all
+    
+    if (term = params[:term]).present?
+      @available_books = @available_books.where(term)
+    end
   end
 
   def return_book
@@ -56,6 +78,8 @@ class BorrowedBooksController < ApplicationController
       redirect_to borrowed_books_path, notice: "Borrow failed. Student: #{@borrowed_book.student.fullname_norm} has too many borrowed books."
     else
       if @borrowed_book.save
+        book_due = @borrowed_book.created_at + (@borrowed_book.book.borrow_duration).day
+        @borrowed_book.update(due_date: book_due)
         flash[:notice] = "Record added successfully!"
         redirect_to action: :new
       else
