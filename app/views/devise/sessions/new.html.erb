@@ -1,42 +1,35 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-8">
-      <div class="loginimageContainer">
-        <div style="text-align:center;">
-          <%= image_tag 'pchs-logo.png', class: "loginImg" %>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="loginContainer">
-        <div style="text-align:left;">
-          <h4><b>PCHS Library Management System</b></h4>
-            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-              <div class="field">
-                <%= f.label :email %><br />
-                <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<section class="ftco-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-5">
+        <div class="login-wrap p-4 p-md-5">
+          <div class="icon d-flex align-items-center justify-content-center">
+            <%= image_tag 'pchs-logo.png', class:'signinLogo' %>
+            <span class="fa fa-user-o"></span>
+          </div>
+          <h3 class="text-center mb-4">PCHS LIBRARY MANAGEMENT</h3>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name), class:'login-form') do |f| %>
+            <div class="form-group">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control rounded-left", placeholder: "Username" %>
+            </div>
+            <div class="form-group d-flex">
+              <%= f.password_field :password, autocomplete: "current-password", class:"form-control rounded-left", placeholder: "Password" %>
+            </div>
+            <div class="form-group d-md-flex">
+              <div class="w-50 text-md-left">
+                <%= link_to "Sign up", new_registration_path(resource_name) %>
               </div>
-
-              <div class="field">
-                <%= f.label :password %><br />
-                <%= f.password_field :password, autocomplete: "current-password" %>
+              <div class="w-50 text-md-right">
+                <a href="#">Forgot Password</a>
               </div>
-
-              <% if devise_mapping.rememberable? %>
-                <div class="field">
-                  <%= f.check_box :remember_me %>
-                  <%= f.label :remember_me %>
-                </div>
-              <% end %>
-
-              <div class="loginBtn">
-                <%= f.submit "Log in" %>
-              </div>
-            <% end %>
-          <%= render "devise/shared/links" %>
+            </div>
+            <div class="form-group">
+              <%= f.submit "Log in", class:"btn btn-primary rounded submit p-3 px-5" %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
