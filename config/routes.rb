@@ -15,7 +15,9 @@ Rails.application.routes.draw do
     collection { post :import }
   end
   
-  resources :subjects
+  resources :subjects do
+    get :delete, on: :member
+  end
 
   resources :borrowed_books do
     get :autocomplete_book, :on => :collection

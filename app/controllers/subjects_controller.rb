@@ -53,6 +53,12 @@ class SubjectsController < ApplicationController
     end
   end
 
+  def delete
+    Subject.find(params[:id]).destroy
+    flash[:notice] = 'Subject deleted successfully'
+    redirect_to action: :index
+  end
+
   private
   def subject_params
     params.require(:subject).permit(:name)

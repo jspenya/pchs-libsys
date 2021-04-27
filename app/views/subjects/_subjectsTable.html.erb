@@ -14,7 +14,7 @@
       <td><%= subject.id %></td>
       <td><%= subject.name %></td>
       <td><%= link_to 'Edit', edit_subject_path(subject) %></td>
-      <td><%= link_to 'Destroy', subject, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Delete', { action: :delete, id: subject.id }, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
 </tbody>
