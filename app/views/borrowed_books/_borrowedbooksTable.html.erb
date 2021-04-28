@@ -17,7 +17,7 @@
       <td><%= borrowed_book.student.lastname %>, <%= borrowed_book.student.firstname %></td>
       <td>
         <% if borrowed_books.returned.include? borrowed_book %>
-          <span class="tablecellAvailable">Returned</span>
+          <span class="tablecellReturned">Returned</span>
         <% else %>
           <span class="tablecellBorrowed">
             Currently Borrowed
