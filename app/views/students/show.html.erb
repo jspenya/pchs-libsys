@@ -12,6 +12,10 @@
           </div>
           <div class="card-body">
             <div class="showDetails">
+              <% if @student.contact_number.present? %>
+                <strong>Student Contact Number: </strong>
+                <p><%= @student.contact_number %></p>
+              <% end %>
               <div style="text-align:center;margin-bottom:20px;"><strong>Borrowed Book History</strong></div>
               <% if @borrowed_books.present? %>
                 <strong>Currently Borrowed Books:</strong>

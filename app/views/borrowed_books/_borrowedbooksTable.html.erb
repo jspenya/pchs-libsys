@@ -16,7 +16,7 @@
       <td><%= borrowed_book.book.title %></td>
       <td><%= borrowed_book.student.lastname %>, <%= borrowed_book.student.firstname %></td>
       <td>
-        <% if borrowed_book.book.is_available? %>
+        <% if borrowed_books.returned.include? borrowed_book %>
           <span class="tablecellAvailable">Returned</span>
         <% else %>
           <span class="tablecellBorrowed">

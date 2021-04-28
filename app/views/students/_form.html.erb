@@ -27,6 +27,12 @@
               <div class="">
                 <%= f.text_field :lastname, required: 'required' %>
               </div>
+              <div class="inputField">
+                <%= f.label :contact_number, 'Contact Number:' %>
+              </div>
+              <div class="">
+                <%= f.text_field :contact_number %>
+              </div>
               <%= f.submit 'Add Student', class:'addButton' %>
             <% end %>
           </div>
