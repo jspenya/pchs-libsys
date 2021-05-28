@@ -38,7 +38,7 @@ class StudentsController < ApplicationController
   # GET /students/1/edit
   def edit
     @user = current_user
-    @user = current_user
+    @student = Student.find(params[:id])
   end
 
   # POST /students or /students.json
