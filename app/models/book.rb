@@ -18,6 +18,7 @@
 #  shelf_number    :string
 #
 class Book < ApplicationRecord
+  searchkick
   belongs_to :subject
   has_many :borrowed_books
   # has_many :borrowed_books, through: :borrowed_books

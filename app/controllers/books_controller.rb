@@ -15,9 +15,17 @@ class BooksController < ApplicationController
   end
 
   def index
+    Book.reindex
     @user = current_user
     @book = Book.new
-    @books = Book.all.order('created_at DESC')
+    # @books = Book.all.order('created_at DESC')
+
+    args = {}
+      args[:isbn] = params[:isbn] if params[:isbn]
+      args[:title] = params[:title] if params[:title]
+      args[:author] = params[:author] if params[:author]
+      
+    @books = Book.search "*", where: args, aggs: {isbn: {}, title: {}, author: {}, availability: {}}
     @subjects = Subject.all
 
     if params[:keyword].present?
