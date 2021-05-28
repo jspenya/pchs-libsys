@@ -182,7 +182,7 @@ $primary: #0b3a66;
 //BUTTON
 .btn {
 	cursor: pointer;
-	@include border-radius(40px);
+	// @include border-radius(40px);
 	box-shadow: none!important;
 	font-size: 15px;
 	&:hover, &:active, &:focus {
