@@ -25,7 +25,12 @@
                       <strong>Book Title: </strong><p><%= bd.book.title %></p>
                     </div>
                     <div class="col-md-6">
-                      <strong>Due Date: (in <%= distance_of_time_in_words(Date.today, bd.due_date)  %>)</strong><p><%= bd.due_date.strftime("%B %d, %Y at %l:%M:%S %p") %></p>
+                      <strong>Due Date: </strong>
+                      <% unless bd.due_date > Date.today %>
+                      This book is overdue. Was due on <%= bd.due_date.strftime("%B %d, %Y at %l:%M:%S %p") %>
+                      <% else %>
+                      (in <%= distance_of_time_in_words(Date.today, bd.due_date)  %>) <p><%= bd.due_date.strftime("%B %d, %Y at %l:%M:%S %p") %></p>
+                      <% end %>
                     </div>
                   </div>
                 <% end %>
