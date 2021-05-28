@@ -1,6 +1,46 @@
-<h1>Editing Student</h1>
-
-<%= render 'form', student: @student %>
-
-<%= link_to 'Show', @student %> |
-<%= link_to 'Back', students_path %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+      <div class="inputContainer">
+        <div class="card">
+          <div class="card-body">
+            <div class="addForm">
+            <%= render 'shared/errors', object: @student %>
+            <%= form_for :student, remote: true, method: :PUT, url: {controller: :students, action: :update} do |f| %>
+              <div class="inputField">
+                <%= f.label :lrn, 'Student LRN:' %>
+              </div>
+              <div class="">
+                <%= f.text_field :lrn, required: 'required' %>
+              </div>
+              <div class="inputField">
+                <%= f.label :firstname, 'First Name:' %>
+              </div>
+              <div class="">
+                <%= f.text_field :firstname, required: 'required' %>
+              </div>
+              <div class="inputField">
+                <%= f.label :lastname, 'Last Name:' %>
+              </div>
+              <div class="">
+                <%= f.text_field :lastname, required: 'required' %>
+              </div>
+              <div class="inputField">
+                <%= f.label :contact_number, 'Contact Number:' %>
+              </div>
+              <div class="">
+                <%= f.text_field :contact_number, required: 'required' %>
+              </div>
+              <%= f.submit 'Edit student', class:'addButton' %>
+            <% end %>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+    </div>
+  </div>
+</div>
