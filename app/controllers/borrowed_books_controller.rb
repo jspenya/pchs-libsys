@@ -94,7 +94,7 @@ class BorrowedBooksController < ApplicationController
   end
 
   def create
-    @borrowed_book = BorrowedBook.new(borrowed_book_params,)
+    @borrowed_book = BorrowedBook.new(borrowed_book_params)
     @borrowed_book.book.update(is_available: false)
 
     # student = @borrowed_book.student_id
