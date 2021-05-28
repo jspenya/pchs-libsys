@@ -60,6 +60,50 @@
         <% end %>
         <div class="container">
           <div class="row">
+            <div class="col-md-2">
+              <h6>ISBN</h6>
+              <% @books.aggs["isbn"]["buckets"].sort_by{|b| b["key"]}.reverse.each do |bucket| %>
+                <div>
+                  <% if params[:isbn] == bucket["key"].to_s %>
+                    <strong>
+                      <%= link_to bucket["key"], request.params.except(:isbn) %>
+                    </strong>
+                    (<%= bucket["doc_count"] %>)
+                  <% else %>
+                    <%= link_to bucket["key"], request.params.merge(isbn: bucket["key"]) %>
+                    (<%= bucket["doc_count"] %>)
+                  <% end %>
+                </div>
+              <% end %>
+              <h6>Title</h6>
+              <% @books.aggs["title"]["buckets"].sort_by{|b| b["key"]}.each do |bucket| %>
+                <div>
+                  <% if params[:title] == bucket["key"].to_s %>
+                    <strong>
+                      <%= link_to bucket["key"], request.params.except(:title) %>
+                    </strong>
+                    (<%= bucket["doc_count"] %>)
+                  <% else %>
+                    <%= link_to bucket["key"], request.params.merge(title: bucket["key"]) %>
+                    (<%= bucket["doc_count"] %>)
+                  <% end %>
+                </div>
+              <% end %>
+              <h6>Author</h6>
+              <% @books.aggs["author"]["buckets"].sort_by{|b| b["key"]}.each do |bucket| %>
+                <div>
+                  <% if params[:author] == bucket["key"].to_s %>
+                    <strong>
+                      <%= link_to bucket["key"], request.params.except(:author) %>
+                    </strong>
+                    (<%= bucket["doc_count"] %>)
+                  <% else %>
+                    <%= link_to bucket["key"], request.params.merge(author: bucket["key"]) %>
+                    (<%= bucket["doc_count"] %>)
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
             <div class="col">
               <% if @user.admin? %>
                 <div id="booksTable">
