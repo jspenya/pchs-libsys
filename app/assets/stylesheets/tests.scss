@@ -1,0 +1,76 @@
+@import "./fonts";
+
+.ordersFooter {
+  // background-color: #0b3a66;
+  color: #fff;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  margin-bottom: 10px;
+  transform: translateX(-50%);
+  .footerordersContainer {
+    text-align: center;
+    margin-top: 10px;
+    .checkoutText {
+      font-size: 1rem;
+      font-family: 'Poppins-SemiBold';
+      line-height: 1rem;
+      padding-right: 10px;
+    }
+  }
+}
+
+.foodContainer {
+  height: 300px;
+  border: none;
+  margin-top: 20px;
+  .foodimageContainer{
+    margin: 20px 0;
+  }
+  .foodImage {
+    width: 150px;
+  }
+  .foodnameContainer {
+    h3 {
+      font-family: 'Poppins-Bold';
+      font-size: 1rem;
+      line-height: 1rem;
+    }
+  }
+  .foodpriceContainer {
+    margin-top: 50px;
+    h4 {
+      font-family: 'EB_Garamond';
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .foodContainer {
+    height: 100px;
+    margin: 0;
+    .foodimageContainer {
+      margin: 0;
+      .foodImage {
+        float: left;
+        margin: 0 25px;
+      }
+    }
+    .foodImage {
+      width: 100px;
+    }
+    .foodnameContainer {
+      text-align: left;
+    }
+    .foodpriceContainer {
+      text-align: left;
+      margin: 0;
+    }
+  }
+
+  .ordersFooter {
+    right: -20%;
+    left: auto;
+  }
+}
