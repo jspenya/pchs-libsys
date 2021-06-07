@@ -31,5 +31,6 @@ Rails.application.routes.draw do
 	get '/filter_books', to: "borrowed_books#filter_books", as: "filter_books"
 	get '/stud_filter_book', to: "books#stud_filter_book", as: "stud_filter_book"
 	get '/borrowed_books/:id/return_book', to: "borrowed_books#return_book", as: "return_book"
+  get '/food', to: "tests#index"
 
 end
