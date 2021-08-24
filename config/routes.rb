@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root :to => "books#index"
 
   resources :books, except: :destroy do
+    resource :like, module: :books
     get :send_details, on: :member
     get :delete, on: :member
     get :show_subjects, on: :collection

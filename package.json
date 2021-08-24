@@ -1,5 +1,7 @@
 {
   "name": "library-management",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "elasticsearch": "^16.7.2"
+  }
 }
