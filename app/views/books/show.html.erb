@@ -50,7 +50,7 @@
               <p><%= image_tag(@book.image.thumb.url, alt: 'Image') %></p>
               <% end %>
               <hr/>
-              <div>
+              <div id="book_<%= @book.id %>_like">
                 <%= render partial: 'likes', locals: {book: @book} %>
               </div>
             </div>

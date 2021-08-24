@@ -21,9 +21,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :likes
-  has_many :students, through: :likes
+  has_many :books, through: :likes
 
   def likes?(book)
-    
+    book.likes.where(user_id: id).any?
   end
 end

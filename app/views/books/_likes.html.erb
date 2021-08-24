@@ -1,0 +1,9 @@
+<% if user_signed_in? && current_user.likes?(book) %>
+  <%= link_to "Unlike", book_like_path(book), method: :delete, remote: true %>
+<% else %>
+  <%= link_to "Like", book_like_path(book), method: :post, remote: true %>
+<% end %>
+
+<span style="float:right;">
+  <p><%= book.likes.count %> Likes</p>
+</span>
