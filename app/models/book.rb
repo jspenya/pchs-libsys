@@ -26,6 +26,7 @@ class Book < ApplicationRecord
   has_many :likes
   has_many :users, through: :likes
 
+  has_many :comments, as: :commentable
   mount_uploader :image, ImageUploader
 
   validates_presence_of :title
