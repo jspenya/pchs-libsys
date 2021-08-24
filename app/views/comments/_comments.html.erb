@@ -1,0 +1,11 @@
+<section id="comments" style="margin-top:1rem;">
+  <h5><b>Comments</b></h5>
+  <% commentable.comments.each do |comment| %>
+    <div class="alert alert-info">
+      <%= comment.body %>
+      <p style="font-size: 0.6rem;margin:0;float:right;">
+        - <%= comment.user.email %>
+      </p>
+    </div>
+  <% end %>
+</section>

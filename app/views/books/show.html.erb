@@ -54,6 +54,8 @@
                 <%= render partial: 'likes', locals: {book: @book} %>
               </div>
             </div>
+            <%= render partial: "comments/comments", locals: {commentable: @book} %>
+            <%= render partial: "comments/form", locals: {commentable: @book} %>
           </div>
         </div>
       </div>

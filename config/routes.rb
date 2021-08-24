@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :students do
     collection { post :import }
+    resources :comments, module: :students
   end
   devise_for :users
 
@@ -8,6 +9,8 @@ Rails.application.routes.draw do
 
   resources :books, except: :destroy do
     resource :like, module: :books
+    resources :comments, module: :books
+
     get :send_details, on: :member
     get :delete, on: :member
     get :show_subjects, on: :collection

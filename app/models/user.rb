@@ -22,6 +22,7 @@ class User < ApplicationRecord
 
   has_many :likes
   has_many :books, through: :likes
+  has_many :comments
 
   def likes?(book)
     book.likes.where(user_id: id).any?

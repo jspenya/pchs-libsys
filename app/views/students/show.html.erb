@@ -34,8 +34,6 @@
                     </div>
                   </div>
                 <% end %>
-              <% end %>
-              <% if @borrowed_returned.present? %>
                 <strong>Returned Books:</strong>
                 <% @borrowed_returned.each do |br| %>
                   <div class="row returnedBooks">
@@ -49,6 +47,9 @@
                 <% end %>
               <% end %>
             </div>
+            <hr>
+            <%= render partial: "comments/comments", locals: {commentable: @student} %>
+            <%= render partial: "comments/form", locals: {commentable: @student} %>
           </div>
         </div>
       </div>
