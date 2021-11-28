@@ -29,4 +29,8 @@ class Student < ApplicationRecord
   def fullname_norm
     @fullname_norm ||= "#{firstname} #{lastname}"
   end
+
+  def unreturned_count
+    borrowed_books.not_returned.count
+  end
 end

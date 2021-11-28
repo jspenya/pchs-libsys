@@ -18,16 +18,16 @@
           <div class="row">
             <div class="col">
               <div class="filterOptionsBorrowed">
-                <%= link_to filter_books_path(book_status: "borrowed"), remote: true, class: "filterButton", title: "All borrowed books" do %>
+                <%= link_to filter_books_borrowed_books_path(book_status: "borrowed"), remote: true, class: "filterButton", title: "All borrowed books" do %>
                   Borrowed
                 <% end %>
-                <%= link_to filter_books_path(book_status: "returned"), remote: true, class: "filterButton", title: "All returned books" do %>
+                <%= link_to filter_books_borrowed_books_path(book_status: "returned"), remote: true, class: "filterButton", title: "All returned books" do %>
                   Returned
                 <% end %>
-                <%= link_to filter_books_path(book_status: "overdue"), remote: true, class: "filterButton", title: "All overdue books" do %>
+                <%= link_to filter_books_borrowed_books_path(book_status: "overdue"), remote: true, class: "filterButton", title: "All overdue books" do %>
                   Overdue
                 <% end %>
-                <%= link_to filter_books_path(book_status: "all"), remote: true, class: "filterButton", title: "All borrowed books" do %>
+                <%= link_to filter_books_borrowed_books_path(book_status: "all"), remote: true, class: "filterButton", title: "All borrowed books" do %>
                   Show All
                 <% end %>
               </div>

@@ -1,15 +1,6 @@
 class BorrowedBooksController < ApplicationController
-  before_action :check_user
+  before_action :set_borrowed_book, only: [:return_book, :edit, :update, :show, :destroy]
   autocomplete :borrowed_book, :term
-
-  def check_user
-    @user = current_user
-    if @user.admin?
-    else
-      flash[:notice] = "You have no power!" 
-      redirect_to root_path
-    end
-  end
 
   def index
     @user = current_user
@@ -17,16 +8,9 @@ class BorrowedBooksController < ApplicationController
 
     if params[:keyword].present?
       searched_date = Date.parse(params[:keyword])
-      # @borrowed_books = @borrowed_books.where('lower(created_at) LIKE :query', query: "%#{(params[:keyword]).downcase}%")
       @borrowed_books = @borrowed_books.where(created_at: searched_date.beginning_of_day..searched_date.end_of_day)
     end
   end
-
-  # def autocomplete
-  #   term = params[:term]
-  #   @books = Book.not_borrowed.where('isbn LIKE' term)
-  #   render :json => @books.map { |book| {:id => book.id, :label => book.isbn_and_title, :value => book.isbn_and_title} }
-  # end
 
   def autocomplete_book
     term = params[:term]
@@ -40,7 +24,6 @@ class BorrowedBooksController < ApplicationController
   end
   
   def new
-    @user = current_user
     @borrowed_book = BorrowedBook.new
     @available_books = Book.not_borrowed
     @students = Student.all
@@ -97,9 +80,8 @@ class BorrowedBooksController < ApplicationController
     @borrowed_book = BorrowedBook.new(borrowed_book_params)
     @borrowed_book.book.update(is_available: false)
 
-    # student = @borrowed_book.student_id
-    if @borrowed_book.student.borrowed_books.not_returned.count > 1
-      redirect_to borrowed_books_path, notice: "Borrow failed. Student: #{@borrowed_book.student.fullname_norm} has too many borrowed books."
+    if @borrowed_book.student.unreturned_count > 1
+      redirect_to borrowed_books_path, notice: "Borrow failed. #{@borrowed_book.student.fullname_norm} has too many borrowed books."
     else
       if @borrowed_book.save
         book_due = @borrowed_book.created_at + (@borrowed_book.book.borrow_duration).day
@@ -114,12 +96,10 @@ class BorrowedBooksController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
   def set_borrowed_book
     @borrowed_book = BorrowedBook.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def borrowed_book_params
     params.require(:borrowed_book).permit(:student_id, :book_id, :user_id, :due_date)
   end
