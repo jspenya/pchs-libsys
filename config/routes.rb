@@ -30,6 +30,4 @@ Rails.application.routes.draw do
       get :return_book
     end
   end
-
-	# get '/stud_filter_book', to: "books#stud_filter_book", as: "stud_filter_book"
 end
