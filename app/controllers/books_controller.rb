@@ -15,17 +15,8 @@ class BooksController < ApplicationController
   end
 
   def index
-    # Book.reindex
     @user = current_user
-    @book = Book.new
     @books = Book.all.order('created_at DESC')
-
-    # args = {}
-    #   args[:isbn] = params[:isbn] if params[:isbn]
-    #   args[:title] = params[:title] if params[:title]
-    #   args[:author] = params[:author] if params[:author]
-      
-    # @books = Book.search "*", where: args, aggs: {isbn: {}, title: {}, author: {}, availability: {}}
     @subjects = Subject.all
 
     if params[:keyword].present?
@@ -129,13 +120,6 @@ class BooksController < ApplicationController
     redirect_to action: :index
   end
 
-  def send_details
-    # Active Job delivery methods  =>  deliver_later, deliver_now
-    # Sidekiq delivery methods     =>  delay
-    UsersMailer.send_book_details(params[:id], current_user.id).deliver_now
-    redirect_to action: :index, notice: 'Book Details Sent!'
-  end
-
   def show_subjects
     @user = current_user
     @subject = Subject.find(params[:id])
@@ -146,9 +130,4 @@ class BooksController < ApplicationController
   def book_params
     params.require(:book).permit(:title, :author, :subject_id, :description, :image, :isbn, :publisher, :book_duration, :shelf_number)
   end
-   # update - permit params
-   def book_param
-    params.require(:book).permit(:title, :author, :price, :subject_id, :description, :image, :image_cache, :isbn, :publisher, :book_duration, :shelf_number)
-  end
-
 end
