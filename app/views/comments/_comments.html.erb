@@ -1,11 +1,11 @@
 <section id="comments" style="margin-top:1rem;">
   <h5><b>Comments</b></h5>
   <% commentable.comments.each do |comment| %>
-    <div class="alert alert-info">
+    <div class="alert alert-info" style="margin:0;">
       <%= comment.body %>
-      <p style="font-size: 0.6rem;margin:0;float:right;">
-        - <%= comment.user.email %>
-      </p>
+    </div>
+    <div style="font-size: 0.7rem;margin-bottom:0.6rem;color:gray;">
+      <%= comment.user.fullname %> · <%= comment.created_at.strftime("%B %d, %Y · %l:%M:%S %p") %>
     </div>
   <% end %>
 </section>

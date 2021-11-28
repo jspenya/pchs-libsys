@@ -1,8 +1,8 @@
 <section id="comments-form">
   <%= form_for [commentable, Comment.new], remote: true do |f| %>
     <div class="form-group">
-      <%= f.text_field :body, class:"form-control", placeholder: "Add a comment" %>
+      <%= f.text_field :body, class:"form-control", placeholder: "Add a comment · Press Enter to Post" %>
     </div>
-    <%= f.submit class: "btn btn-primary" %>
+    <%= f.submit class: "btn btn-primary", style:"display:none;" %>
   <% end %>
 </section>
