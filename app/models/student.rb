@@ -33,4 +33,12 @@ class Student < ApplicationRecord
   def unreturned_count
     borrowed_books.not_returned.count
   end
+
+  def unreturned_books
+    borrowed_books.not_returned
+  end
+
+  def returned_books
+    borrowed_books.returned
+  end
 end
