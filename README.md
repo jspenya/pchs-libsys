@@ -11,6 +11,7 @@ Features
 - Import books via CSV
 - Separate admin UI & student UI
 - Updated from Rails 2 to Rails 5
+- Commenting feature on books & users
 
 Gems
 ----
