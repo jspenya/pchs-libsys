@@ -16,14 +16,14 @@
             <div class="row">
               <div class="col">
                 <div >
-                  <%= form_tag(books_path, method: :get) do %>
+                  <%= form_tag(books_path, method: :get, remote: true) do %>
                     <div class="searchCategory">
                       Search by Category: <%= select_tag :subject, options_for_select(@subjects.collect { |s| [s.name, s.id] }, params[:subject]), { include_blank: 'Select Subject' } %>
                       <%= submit_tag 'Search', :class => 'filtercategoryButton' %>
                     </div>
                   <% end %>
                   <div class="filterOptions">
-                    <%= form_tag(books_path, method: :get) do %>
+                    <%= form_tag(books_path, method: :get, remote: true) do %>
                       <%= text_field_tag :keyword, params[:keyword], class:"searchBox", placeholder: "ISBN or Book Title or Author Name" %> 
                       <div class="submitTag">
                       <%= submit_tag "Search", class: "searchfilterButton" %>
