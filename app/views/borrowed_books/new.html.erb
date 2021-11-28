@@ -19,8 +19,6 @@
                   <%= f.label :book, 'Book Title:' %>
                 </div>
                 <div style="text-align:left;">
-                  <%#= f.select :book_id, options_for_select(@available_books.collect { |b| [b.isbn_and_title, b.id] }), { include_blank: 'Select Book' }, required: 'true' %>
-                
                   <%= f.autocomplete_field :book_id, autocomplete_book_borrowed_books_path, :id_element => "#book_id", 'data-auto-focus' => true %>
                   <%= f.hidden_field :book_id, id:"book_id" %>
                 </div>
