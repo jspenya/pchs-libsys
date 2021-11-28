@@ -21,7 +21,6 @@ class Book < ApplicationRecord
   searchkick
   belongs_to :subject
   has_many :borrowed_books
-  # has_many :borrowed_books, through: :borrowed_books
   has_many :students, :through => :borrowed_books
   has_many :likes
   has_many :users, through: :likes
@@ -44,8 +43,7 @@ class Book < ApplicationRecord
     end
   end
   
-
   def isbn_and_title
-    "#{isbn} #{title}"
+    @isbn_and_title ||= "#{isbn} #{title}"
   end
 end
