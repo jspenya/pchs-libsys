@@ -41,4 +41,12 @@ class Book < ApplicationRecord
   def isbn_and_title
     @isbn_and_title ||= "#{isbn} #{title}"
   end
+
+  def self.search_keyword(keyword)
+    where('lower(isbn) ILIKE :query OR lower(title) ILIKE :query OR lower(author) ILIKE :query', query: "%#{keyword}%")
+  end
+
+  def self.search_subject(subject)
+    where('subject_id = :query', query: "#{subject}")
+  end
 end

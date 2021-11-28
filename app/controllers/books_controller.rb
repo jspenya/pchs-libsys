@@ -9,33 +9,17 @@ class BooksController < ApplicationController
     @subjects = Subject.all
 
     if params[:keyword].present?
-			@books = @books.where('lower(isbn) LIKE :query OR lower(title) LIKE :query OR lower(author) LIKE :query', query: "%#{(params[:keyword]).downcase}%")
+			@books = @books.search_keyword(params[:keyword])
 		end
 
     if params[:subject].present?
-      @books = @books.where('subject_id = :query', query: "#{(params[:subject])}")
-    end
-
-    if (term = params[:term]).present?
-      terms = make_terms_from term
-      @books = @books.where(terms)
+      @books = @books.search_subject(params[:subject])
     end
 
     respond_to do |format|
       format.html { }
       format.js {  }
     end
-  end
-
-  def autocomplete_book
-    term = params[:term]
-    terms = make_terms_from term
-    @books = Book.not_borrowed.where(terms)
-    render :json => @books.map { |book| {:id => book.id, :label => book.isbn_and_title, :value => book.isbn_and_title} }
-  end
-  
-  def make_terms_from term
-    terms = term.split.map{|t| "isbn ilike '%%%s%%'" % t}.join(" or ")    
   end
 
   def show
@@ -98,7 +82,7 @@ class BooksController < ApplicationController
   def set_book
     @book = Book.find(params[:id])
   end
-  # create - permit params
+  
   def book_params
     params.require(:book).permit(:title, :author, :subject_id, :description, :image, :isbn, :publisher, :book_duration, :shelf_number)
   end
