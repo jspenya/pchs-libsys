@@ -15,6 +15,18 @@
                 <div style="text-align:left">
                   <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
                 </div>
+                <div class="inputField">
+                  <b><%= f.label :first_name %></b>
+                </div>
+                <div style="text-align:left">
+                  <%= f.text_field :first_name %>
+                </div>
+                <div class="inputField">
+                  <b><%= f.label :last_name %></b>
+                </div>
+                <div style="text-align:left">
+                  <%= f.text_field :last_name %>
+                </div>
 
                 <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
                   <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
