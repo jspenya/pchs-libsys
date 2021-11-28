@@ -14,7 +14,6 @@ Rails.application.routes.draw do
     get :send_details, on: :member
     get :delete, on: :member
     get :show_subjects, on: :collection
-    # get :autocomplete_book_isbn, :on => :collection
     get :autocomplete_book, :on => :collection
     collection { post :import }
   end
@@ -27,14 +26,9 @@ Rails.application.routes.draw do
     get :autocomplete_book, :on => :collection
   end
 
-  devise_scope :user do
-    # root to: "devise/sessions#new"
-  end
-
 	get '/filter_book', to: "books#filter_book", as: "filter_book"
 	get '/filter_books', to: "borrowed_books#filter_books", as: "filter_books"
 	get '/stud_filter_book', to: "books#stud_filter_book", as: "stud_filter_book"
 	get '/borrowed_books/:id/return_book', to: "borrowed_books#return_book", as: "return_book"
-  get '/food', to: "tests#index"
 
 end
