@@ -10,7 +10,7 @@
         <% end %>
         <div class="searchContainer">
           <div class="container">
-            <%= form_tag(students_path, method: :get) do %>
+            <%= form_tag(students_path, method: :get, remote: true) do %>
               <b>Search a Student</b><br/> <%= text_field_tag :keyword, params[:keyword], class:"searchBox", placeholder: "Search by LRN or Student Name" %> 
               <div class="submitTag">
               <%= submit_tag "Search", class: "searchfilterButton" %>
@@ -22,7 +22,7 @@
       <div class="container">
         <div class="row">
           <div class="col">
-            <table class="studentsTable table table-responsive-md table-striped">
+            <table class="studentsTable table table-responsive-md table-striped" id="studentsTable">
               <%= render partial: "studentsTable", locals: {students: @students} %>
             </table>
           </div>

@@ -13,20 +13,23 @@ class StudentsController < ApplicationController
 
   # GET /students or /students.json
   def index
-    @user = current_user
     @students = Student.all
     @students = @students
 
     if params[:keyword].present?
 			@students = @students.where('lower(lrn) LIKE :query OR lower(firstname) LIKE :query OR lower(lastname) LIKE :query', query: "%#{(params[:keyword]).downcase}%")
 		end
+
+    respond_to do |format|
+      format.html { }
+      format.js {  }
+    end
   end
 
   # GET /students/1 or /students/1.json
   def show
-    @user = current_user
-    @borrowed_books = Student.find(params[:id]).borrowed_books.not_returned
-    @borrowed_returned = Student.find(params[:id]).borrowed_books.returned
+    @borrowed_books = Student.find(params[:id]).unreturned_books
+    @borrowed_returned = Student.find(params[:id]).returned_books
   end
 
   # GET /students/new
