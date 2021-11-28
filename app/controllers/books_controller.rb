@@ -1,18 +1,6 @@
 class BooksController < ApplicationController
-  # protect_from_forgery with: :null_session  # remove csrf authentication on http requests
-  before_action :check_user, except: [:index, :show, :stud_filter_book, :send_details]
   require 'csv'
-
   autocomplete :book, :isbn
-
-  def check_user
-    @user = current_user
-    if @user.admin?
-    else
-      flash[:notice] = "You have no power!" 
-      redirect_to root_path
-    end
-  end
 
   def index
     @user = current_user
@@ -47,15 +35,6 @@ class BooksController < ApplicationController
   
   def make_terms_from term
     terms = term.split.map{|t| "isbn ilike '%%%s%%'" % t}.join(" or ")    
-  end
-
-  def filter_book
-    @books = Book.all.order('created_at DESC')
-
-    respond_to do |format|
-      format.html { }
-      format.js { }
-    end
   end
 
   def stud_filter_book
