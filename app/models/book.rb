@@ -18,24 +18,19 @@
 #  shelf_number    :string
 #
 class Book < ApplicationRecord
-  searchkick
+  # searchkick
   belongs_to :subject
-  has_many :borrowed_books
+  validates_presence_of :title
+  has_many :borrowed_books, dependent: :destroy
   has_many :students, :through => :borrowed_books
-  has_many :likes
+  has_many :likes, dependent: :destroy
   has_many :users, through: :likes
-
   has_many :comments, as: :commentable
   mount_uploader :image, ImageUploader
 
-  validates_presence_of :title
-
   scope :borrowed, ->{where( id: BorrowedBook.not_returned.pluck(:book_id))}
-  
   scope :not_borrowed, ->{ Book.all.where.not(id: Book.borrowed)}
-  
   scope :returned, ->{where( id: BorrowedBook.returned.pluck(:book_id))}
-  # Ex:- scope :active, -> {where(:active => true)}
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
