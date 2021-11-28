@@ -23,10 +23,10 @@ class Student < ApplicationRecord
   end
 
   def fullname
-    "#{lrn} - #{lastname}, #{firstname}"
+    @fullname ||= "#{lrn} - #{lastname}, #{firstname}"
   end
 
   def fullname_norm
-    "#{firstname} #{lastname}"
+    @fullname_norm ||= "#{firstname} #{lastname}"
   end
 end
