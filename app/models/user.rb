@@ -27,4 +27,8 @@ class User < ApplicationRecord
   def likes?(book)
     book.likes.where(user_id: id).any?
   end
+
+  def fullname
+    @name ||= "#{first_name} #{last_name}"
+  end
 end
