@@ -28,7 +28,7 @@
         </td>
         <td><%= link_to 'Show', book %></td>
         <td><%= link_to 'Edit', edit_book_path(book) %></td>
-        <td><%= link_to 'Delete', { action: :delete, id: book.id }, data: { confirm: 'Are you sure?' } %>
+        <td><%= link_to 'Delete', book, method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>

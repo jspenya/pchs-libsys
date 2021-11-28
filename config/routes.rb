@@ -7,10 +7,9 @@ Rails.application.routes.draw do
 
   root :to => "books#index"
 
-  resources :books, except: :destroy do
+  resources :books do
     resource :like, module: :books
     resources :comments, module: :books
-    get :delete, on: :member
 
     collection do
       get :show_subjects

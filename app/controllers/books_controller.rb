@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
-  require 'csv'
+  before_action :set_book, only: [:show, :destroy, :edit, :update]
   autocomplete :book, :isbn
+  require 'csv'
 
   def index
     @user = current_user
@@ -39,7 +40,7 @@ class BooksController < ApplicationController
 
   def show
     @user = current_user
-    @book = Book.find(params[:id])
+    @book = @book
   end
 
   def new
@@ -69,13 +70,12 @@ class BooksController < ApplicationController
 
   def edit
     @user = current_user
-    @book = Book.find(params[:id])
     @subjects = Subject.all
   end
 
   def update
-    @book = Book.find(params[:id])
-    if @book.update_attributes(book_param)
+    if @book.update_attributes(book_params)
+      flash[:notice] = "Successfully updated book!"
       redirect_to action: :show, id: @book
     else
       flash[:error] = "Error updating book."
@@ -84,18 +84,20 @@ class BooksController < ApplicationController
     end
   end
 
-  def delete
-    Book.find(params[:id]).destroy
+  def destroy
+    @book.destroy
     flash[:notice] = 'Book deleted successfully'
     redirect_to action: :index
   end
 
   def show_subjects
-    @user = current_user
     @subject = Subject.find(params[:id])
   end
 
   private
+  def set_book
+    @book = Book.find(params[:id])
+  end
   # create - permit params
   def book_params
     params.require(:book).permit(:title, :author, :subject_id, :description, :image, :isbn, :publisher, :book_duration, :shelf_number)
