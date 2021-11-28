@@ -37,15 +37,6 @@ class BooksController < ApplicationController
     terms = term.split.map{|t| "isbn ilike '%%%s%%'" % t}.join(" or ")    
   end
 
-  def stud_filter_book
-    @books = Book.all.order('created_at DESC')
-
-    respond_to do |format|
-			format.html { }
-			format.js { }
-		end
-	end
-
   def show
     @user = current_user
     @book = Book.find(params[:id])

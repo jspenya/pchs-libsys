@@ -10,12 +10,13 @@ Rails.application.routes.draw do
   resources :books, except: :destroy do
     resource :like, module: :books
     resources :comments, module: :books
-
-    get :send_details, on: :member
     get :delete, on: :member
-    get :show_subjects, on: :collection
-    get :autocomplete_book, :on => :collection
-    collection { post :import }
+
+    collection do
+      get :show_subjects
+      get :autocomplete_book
+      post :import
+    end
   end
   
   resources :subjects do
@@ -23,12 +24,13 @@ Rails.application.routes.draw do
   end
 
   resources :borrowed_books do
-    get :autocomplete_book, :on => :collection
+    get :autocomplete_book, on: :collection
+    get :filter_books, on: :collection
+
+    member do
+      get :return_book
+    end
   end
 
-	get '/filter_book', to: "books#filter_book", as: "filter_book"
-	get '/filter_books', to: "borrowed_books#filter_books", as: "filter_books"
-	get '/stud_filter_book', to: "books#stud_filter_book", as: "stud_filter_book"
-	get '/borrowed_books/:id/return_book', to: "borrowed_books#return_book", as: "return_book"
-
+	# get '/stud_filter_book', to: "books#stud_filter_book", as: "stud_filter_book"
 end
