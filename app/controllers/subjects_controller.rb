@@ -31,6 +31,8 @@ class SubjectsController < ApplicationController
   end
 
   def edit
+    @user = current_user
+
     @subject = Subject.find(params[:id])
   end
 
