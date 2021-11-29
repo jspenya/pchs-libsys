@@ -5,7 +5,7 @@ class SubjectsController < ApplicationController
     @user = current_user
     @subjects = Subject.all
     if params[:keyword].present?
-			@subjects = @subjects.where('lower(name) LIKE :query', query: "%#{(params[:keyword]).downcase}%")
+			@subjects = @subjects.search_keyword(params[:keyword])
 		end
   end
 
