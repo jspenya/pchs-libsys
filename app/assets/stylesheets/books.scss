@@ -42,10 +42,12 @@ a:link, a:active, a:visited {
 .unavailableHeader {
   background-color:rgba(141, 0, 0, 0.822) !important;
   color: #ffffff;
+  text-align: center;
 }
 
 .availableHeader {
   background-color:rgba(5, 141, 0, 0.616) !important;
+  text-align: center;
   // color: #ffffff;
 }
 

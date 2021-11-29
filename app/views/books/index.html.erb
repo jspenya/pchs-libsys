@@ -71,17 +71,23 @@
                           <% if book.is_available %>
                             <div class="card-header availableHeader">
                               <%= link_to book do %>
-                                <span class='cardBookLink'><%= book.title %></span>
+                                <% if book.thumbnail_image_url? %>
+                                  <%= image_tag book.thumbnail_image_url, lazy: true, style: "margin-bottom:1rem;" %>
+                                <% end %>
+                                <div class='cardBookLink'><%= book.title %></div>
                               <% end %>
-                              <span id="book_<%= book.id %>_like"><%= render partial: 'likes', locals: { book: book } %></span>
+                              <div style="margin-top:1rem;text-align:left!important;" id="book_<%= book.id %>_like"><%= render partial: 'likes', locals: { book: book } %></div>
                             </div>
                           <% else %>
                             <div class="card-header unavailableHeader">
-                              <% if book.image_url? %>
-                                <%= image_tag book.image_url %>
+                              <%= link_to book do %>
+                                <% if book.thumbnail_image_url? %>
+                                  <%= image_tag book.thumbnail_image_url, lazy: true, style: "margin-bottom:1rem;" %>
+                                <% end %>
+                                <div class='cardBookLink'><%= book.title %></div>
                               <% end %>
-                              <b><%= book.title %></b>
                             </div>
+                            <div style="margin-top:1rem;text-align:left!important;" id="book_<%= book.id %>_like"><%= render partial: 'likes', locals: { book: book } %></div>
                           <% end %>
                           <div class="card-body">
                             <b>ISBN:</b>
