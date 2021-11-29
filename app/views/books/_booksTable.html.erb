@@ -19,9 +19,9 @@
         <td><%= book.author %></td>
         <td>
           <% if book.is_available? %>
-            <span class="tablecellAvailable">Available</span>
+            <span class="badge bg-success">Available</span>
           <% else %>
-            <span class="tablecellUnavailable">
+            <span class="badge bg-warning text-dark">
               Not Available
             </span>
           <% end %>
