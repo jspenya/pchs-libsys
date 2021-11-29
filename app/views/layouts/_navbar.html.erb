@@ -13,7 +13,7 @@
           <li class="nav-item active">
             <%= link_to "Books", books_path(), class:'nav-link' %>
           </li>
-          <%# if @user.admin? %>
+          <% if @user.admin? %>
             <li class="nav-item active">
               <%= link_to "Students", students_path, class:"nav-link" %>
             </li>
@@ -23,7 +23,7 @@
             <li class="nav-item active">
               <%= link_to "Categories", subjects_path(), class:'nav-link' %>
             </li>
-          <%# end %>
+          <% end %>
           <% if user_signed_in? %>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
