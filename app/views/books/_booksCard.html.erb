@@ -1,0 +1,39 @@
+<div class="row row-cols-1 row-cols-md-3">
+  <% @books.each do |book| %>
+    <div class="col-md-3">
+      <div class="bookcardContainer">
+        <div class="card">
+          <% if book.is_available %>
+            <div class="card-header availableHeader">
+              <%= link_to book do %>
+                <% if book.thumbnail_image_url? %>
+                  <%= image_tag book.thumbnail_image_url, lazy: true, style: "margin-bottom:1rem;" %>
+                <% end %>
+                <div class='cardBookLink'><%= book.title %></div>
+              <% end %>
+              <div style="margin-top:1rem;text-align:left!important;" id="book_<%= book.id %>_like"><%= render partial: 'likes', locals: { book: book } %></div>
+            </div>
+          <% else %>
+            <div class="card-header unavailableHeader">
+              <%= link_to book do %>
+                <% if book.thumbnail_image_url? %>
+                  <%= image_tag book.thumbnail_image_url, lazy: true, style: "margin-bottom:1rem;" %>
+                <% end %>
+                <div class='cardBookLink'><%= book.title %></div>
+              <% end %>
+            </div>
+            <div style="margin-top:1rem;text-align:left!important;" id="book_<%= book.id %>_like"><%= render partial: 'likes', locals: { book: book } %></div>
+          <% end %>
+          <div class="card-body">
+            <b>ISBN:</b>
+            <%= book.isbn %><br/>
+            <b>Author:</b>
+            <%= book.author %><br/>
+            <b>Shelf Number:</b>
+            <%= book.shelf_number %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
