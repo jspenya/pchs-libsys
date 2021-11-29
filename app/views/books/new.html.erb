@@ -8,51 +8,7 @@
           <div class="card-body">
             <div class="addForm">
             <%= render 'shared/errors', object: @book %>
-            <%= form_for :book, remote: true, url: { controller: :books, action: :create } do |f| %>
-              <div class="inputField">
-                <%= f.label :isbn, 'ISBN:' %>
-              </div>
-              <div class="">
-                <%= f.text_field :isbn, required: 'required' %>
-              </div>
-              <div class="inputField">
-                <%= f.label :title, 'Title:' %>
-              </div>
-              <div class="">
-                <%= f.text_field :title, required: 'required' %>
-              </div>
-              <div class="inputField">
-                <%= f.label :author, 'Author:' %>
-              </div>
-              <div class="">
-                <%= f.text_field :author, required: 'required' %>
-              </div>
-              <div class="inputField">
-                <%= f.label :publisher, 'Publisher:' %>
-              </div>
-              <div class="">
-                <%= f.text_field :publisher, required: 'required' %>
-              </div>
-              <div class="inputField">
-                <%= f.label :shelf_number, 'Shelf Number:' %>
-              </div>
-              <div class="">
-                <%= f.text_field :shelf_number, required: 'required' %>
-              </div>
-              <div class="inputField">
-                <%= f.label :subject, 'Subject:' %>
-              </div>
-              <div style="text-align:left;">
-                <%= f.select :subject_id, options_for_select(@subjects.collect { |s| [s.name, s.id] }), { include_blank: 'Select Subject' }, required: 'required' %>
-              </div>
-              <div class="inputField">
-                <%= f.label :description, 'Description:' %>
-              </div>
-              <div class="">
-                <%= f.text_area :description, required: 'required' %>
-              </div>
-              <%= f.submit 'Add Book', class:'addButton' %>
-            <% end %>
+            <%= render 'books/form', book: @book %>
           </div>
           </div>
         </div>
