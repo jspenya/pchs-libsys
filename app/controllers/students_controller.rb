@@ -28,6 +28,7 @@ class StudentsController < ApplicationController
 
   # GET /students/1 or /students/1.json
   def show
+    @user = current_user
     @borrowed_books = Student.find(params[:id]).unreturned_books
     @borrowed_returned = Student.find(params[:id]).returned_books
   end

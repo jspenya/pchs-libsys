@@ -10,6 +10,7 @@ class SubjectsController < ApplicationController
   end
 
   def show
+    @user = current_user
     @subject
   end
 
