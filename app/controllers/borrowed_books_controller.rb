@@ -24,6 +24,8 @@ class BorrowedBooksController < ApplicationController
   end
   
   def new
+    @user = current_user
+
     @borrowed_book = BorrowedBook.new
     @available_books = Book.not_borrowed
     @students = Student.all
