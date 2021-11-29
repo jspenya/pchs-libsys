@@ -2,6 +2,7 @@ class SubjectsController < ApplicationController
   before_action :set_subject, only: [:show, :edit, :update, :delete]
 
   def index
+    @user = current_user
     @subjects = Subject.all
     if params[:keyword].present?
 			@subjects = @subjects.where('lower(name) LIKE :query', query: "%#{(params[:keyword]).downcase}%")
