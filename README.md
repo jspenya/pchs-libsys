@@ -1,11 +1,11 @@
 Environment
 --------
-Ruby Version: Ruby 2.6.7
-Rails Version: Rails 5.2.5
-Database: PostgreSQL
-Others:
-Delayed Job (Optional)
-ElasticSearch (Optional)
+- Ruby Version: Ruby 2.6.7
+- Rails Version: Rails 5.2.5
+- Database: PostgreSQL
+- Others:
+  - Delayed Job (Optional)
+  - ElasticSearch (Optional)
 
 Development Setup
 --------
