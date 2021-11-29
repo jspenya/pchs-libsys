@@ -9,11 +9,11 @@
             <div class="bookTitle">
               <b><%= @book.title %></b>
               <% if @book.is_available %>
-              <span class="availableTitle">
+              <span class="badge bg-success" style="margin-left:0.5rem;">
                 <b>Available</b>
               </span>
               <% else %>
-                <span class="unavailableTitle">
+                <span class="badge bg-warning text-dark">
                   <b>Unavailable</b>
                 </span>
               <% end %>

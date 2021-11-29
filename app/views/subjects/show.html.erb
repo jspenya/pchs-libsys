@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="showsubjectContainer">
+        <div class="card">
+          <div class="card-header">
+            <b><%= @subject.name %> books</b>
+          </div>
+          <div class="card-body">
+            <% @subject.books.each do |c| %>
+              <li><%= link_to c.title, book_path(c.id) %></li>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

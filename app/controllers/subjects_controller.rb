@@ -1,30 +1,22 @@
 class SubjectsController < ApplicationController
-  before_action :check_user
-
-  def check_user
-    @user = current_user
-    if @user.admin?
-    else
-      flash[:notice] = "You have no power!" 
-      redirect_to root_path
-    end
-  end
+  before_action :set_subject, only: [:show, :edit, :update, :delete]
 
   def index
-    @user = current_user
     @subjects = Subject.all
     if params[:keyword].present?
 			@subjects = @subjects.where('lower(name) LIKE :query', query: "%#{(params[:keyword]).downcase}%")
 		end
   end
 
+  def show
+    @subject
+  end
+
   def new
-    @user = current_user
     @subject = Subject.new
   end
 
   def create
-    @user = current_user
     @subject = Subject.new(subject_params)
     
     if @subject.save
@@ -37,7 +29,6 @@ class SubjectsController < ApplicationController
   end
 
   def edit
-    @user = current_user
     @subject = Subject.find(params[:id])
   end
 
@@ -54,12 +45,16 @@ class SubjectsController < ApplicationController
   end
 
   def delete
-    Subject.find(params[:id]).destroy
+    @subject
     flash[:notice] = 'Subject deleted successfully'
     redirect_to action: :index
   end
 
   private
+  def set_subject
+    @subject = Subject.find(params[:id])
+  end
+
   def subject_params
     params.require(:subject).permit(:name)
   end
