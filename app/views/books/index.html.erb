@@ -15,21 +15,19 @@
           <div class="container">
             <div class="row">
               <div class="col">
-                <div >
+                <div style="float:right;">
+                  <div class="filterOptions">
+                    <%= form_tag(books_path, method: :get, remote: true) do %>
+                      <%= text_field_tag :keyword, params[:keyword], class:"searchBox", placeholder: "Search by ISBN or Book Title or Author" %> 
+                      <%= submit_tag "Search", class: "filtercategoryButton" %>
+                    <% end %>
+                  </div>
                   <%= form_tag(books_path, method: :get, remote: true) do %>
                     <div class="searchCategory">
-                      Search by Category: <%= select_tag :subject, options_for_select(@subjects.collect { |s| [s.name, s.id] }, params[:subject]), { include_blank: 'Select Subject' } %>
+                      <%= select_tag :subject, options_for_select(@subjects.collect { |s| [s.name, s.id] }, params[:subject]), { include_blank: 'Select Subject' } %>
                       <%= submit_tag 'Search', :class => 'filtercategoryButton' %>
                     </div>
                   <% end %>
-                  <div class="filterOptions">
-                    <%= form_tag(books_path, method: :get, remote: true) do %>
-                      <%= text_field_tag :keyword, params[:keyword], class:"searchBox", placeholder: "ISBN or Book Title or Author Name" %> 
-                      <div class="submitTag">
-                      <%= submit_tag "Search", class: "searchfilterButton" %>
-                      </div>
-                    <% end %>
-                  </div>
                 </div>
               </div>
             </div>
@@ -38,21 +36,19 @@
           <div class="container">
             <div class="row">
               <div class="col">
-                <div>
-                  <%= form_tag(books_path, method: :get) do %>
-                    <div class="searchCategory">
-                      Search by Category: <%= select_tag :subject, options_for_select(@subjects.collect { |s| [s.name, s.id] }, params[:subject]), { include_blank: 'Select Subject' } %>
-                      <%= submit_tag 'Search', :class => 'btn btn-primary btn-sm' %>
-                    </div>
-                  <% end %>
+                <div style="float:right;">
                   <div class="filterOptions">
-                    <%= form_tag(books_path, method: :get) do %>
-                      <%= text_field_tag :keyword, params[:keyword], class:"searchBox", placeholder: "ISBN or Book Title or Author Name" %> 
-                      <div class="submitTag">
-                      <%= submit_tag "Search", class: "searchfilterButton" %>
-                      </div>
+                    <%= form_tag(books_path, method: :get, remote: true) do %>
+                      <%= text_field_tag :keyword, params[:keyword], class:"searchBox", placeholder: "Search by ISBN or Book Title or Author" %> 
+                      <%= submit_tag "Search", class: "filtercategoryButton" %>
                     <% end %>
                   </div>
+                  <%= form_tag(books_path, method: :get, remote: true) do %>
+                    <div class="searchCategory">
+                      <%= select_tag :subject, options_for_select(@subjects.collect { |s| [s.name, s.id] }, params[:subject]), { include_blank: 'Select Subject' } %>
+                      <%= submit_tag 'Search', :class => 'filtercategoryButton' %>
+                    </div>
+                  <% end %>
                 </div>
               </div>
             </div>
@@ -81,6 +77,9 @@
                             </div>
                           <% else %>
                             <div class="card-header unavailableHeader">
+                              <% if book.image_url? %>
+                                <%= image_tag book.image_url %>
+                              <% end %>
                               <b><%= book.title %></b>
                             </div>
                           <% end %>
