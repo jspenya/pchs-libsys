@@ -1,3 +1,5 @@
+*Production in heroku is not running ElasticSearch, as it is not free.*
+
 Environment
 --------
 - Ruby Version: Ruby 2.6.7
@@ -27,3 +29,4 @@ Populate books via Google Books API
 2. Put API key inside secret by running: `EDITOR="code --wait" bin/rails credentials:edit`. Replace `code` with your editor. Save then close file.
 3. Check `get_books.rake` rakefile to see if secret matches. `Rails.application.secrets.your_secret_name_here`
 4. Run `rake get_books:get_books`
+
