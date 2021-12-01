@@ -6,8 +6,9 @@ Environment
 - Rails Version: Rails 5.2.5
 - Database: PostgreSQL
 - Others:
-  - Delayed Job (Optional)
-  - ElasticSearch (Optional)
+  - ElasticSearch 7.15.2
+  - DelayedJob (Optional)
+  
 
 Development Setup
 --------
