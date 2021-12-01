@@ -1,4 +1,4 @@
-*Production in heroku is not running ElasticSearch, as it is not free.*
+*Production on Heroku is not running ElasticSearch, as ES plugin in Heroku isn't free :(*
 
 Environment
 --------
