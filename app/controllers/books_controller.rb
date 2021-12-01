@@ -5,12 +5,12 @@ class BooksController < ApplicationController
 
   def index
     @user = current_user
-    @books = Book.all.order('created_at DESC')
+    @books = Book.all.order('created_at DESC').page(params[:page])
     @subjects = Subject.all
 
     if params[:keyword].present?
       query = params[:keyword]
-      @books = @books.search(query, suggest: true)
+      @books = @books.search(query, suggest: true, page: params[:page])
 		end
 
     if params[:subject].present?

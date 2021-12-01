@@ -18,6 +18,7 @@
 #  shelf_number    :string
 #
 class Book < ApplicationRecord
+  self.per_page = 10
   searchkick text_start: [:title], suggest: [:title]
   belongs_to :subject
   validates_presence_of :title
@@ -31,6 +32,7 @@ class Book < ApplicationRecord
   scope :borrowed, ->{where( id: BorrowedBook.not_returned.pluck(:book_id))}
   scope :not_borrowed, ->{ Book.all.where.not(id: Book.borrowed)}
   scope :returned, ->{where( id: BorrowedBook.returned.pluck(:book_id))}
+
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
