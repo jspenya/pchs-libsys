@@ -9,7 +9,7 @@ class BooksController < ApplicationController
     @subjects = Subject.all
 
     if params[:keyword].present?
-			@books = @books.search_keyword(params[:keyword])
+      @books = @books.search(params[:keyword])
 		end
 
     if params[:subject].present?
