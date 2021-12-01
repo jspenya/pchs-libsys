@@ -33,6 +33,12 @@ class Book < ApplicationRecord
   scope :not_borrowed, ->{ Book.all.where.not(id: Book.borrowed)}
   scope :returned, ->{where( id: BorrowedBook.returned.pluck(:book_id))}
 
+  def search_data
+    {
+      title: title,
+      subject: subject
+    }
+  end
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
