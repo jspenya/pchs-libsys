@@ -78,6 +78,10 @@ class BooksController < ApplicationController
     @subject = Subject.find(params[:id])
   end
 
+  def autocomplete_es
+    render json: Book.search(params[:term], fields: [{title: :text_start}], limit: 10).map(&:title)
+  end
+
   private
   def set_book
     @book = Book.find(params[:id])

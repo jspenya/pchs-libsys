@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     collection do
       get :show_subjects
       get :autocomplete_book
+      get :autocomplete_es
       post :import
     end
   end

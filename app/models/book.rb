@@ -18,7 +18,7 @@
 #  shelf_number    :string
 #
 class Book < ApplicationRecord
-  searchkick
+  searchkick text_start: [:title]
   belongs_to :subject
   validates_presence_of :title
   has_many :borrowed_books, dependent: :destroy
