@@ -1,3 +1,7 @@
+<% if @books.try(:suggestions).present? %>
+  <% suggest_keyword = @books.try(:suggestions).first %>
+    <p>Did you mean: <%= link_to suggest_keyword, books_path(:keyword => suggest_keyword), method: :get %></p>
+<% end %>
 <div class="row row-cols-1 row-cols-md-3">
   <% @books.each do |book| %>
     <div class="col-md-3">

@@ -9,7 +9,8 @@ class BooksController < ApplicationController
     @subjects = Subject.all
 
     if params[:keyword].present?
-      @books = @books.search(params[:keyword])
+      query = params[:keyword]
+      @books = @books.search(query, suggest: true)
 		end
 
     if params[:subject].present?
