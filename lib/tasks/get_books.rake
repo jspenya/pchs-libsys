@@ -7,7 +7,7 @@ namespace :get_books do
     response["items"].each do |item|
       # 1. Build category
       category = Subject.new
-      category.name = item["volumeInfo"]["title"] || ""
+      category.name = item["volumeInfo"]["categories"] || ""
       category.save
 
       # 2. Build book
