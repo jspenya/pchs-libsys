@@ -17,6 +17,8 @@ class BooksController < ApplicationController
       @books = @books.search_subject(params[:subject])
     end
 
+    @books = @books.page(params[:page])
+
     respond_to do |format|
       format.html { }
       format.js {  }
